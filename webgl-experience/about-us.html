@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Gaurya Farms</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Inter"', 'sans-serif'] },
+                    colors: { charcoal: '#1A1A1A', alabaster: '#FAF9F6', gold: '#C5A059', muted: '#8C8C8C' }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #1A1A1A; color: #FAF9F6; cursor: none; overflow-x: hidden; }
+        ::selection { background-color: #C5A059; color: white; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .reveal-up { opacity: 0; transform: translateY(30px); }
+    </style>
+</head>
+<body class="font-sans antialiased text-alabaster">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Header Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Home</a>
+                <a href="https://gauryafarms.com/collections/all" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
+                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Our Story</a>
+                <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Lab Report</a>
+                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Contact</a>
+                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-24 px-6 min-h-screen">
+        <!-- Section 1: Hero Heritage -->
+        <div class="max-w-4xl mx-auto text-center space-y-8 mb-32">
+            <p class="text-gold tracking-[0.3em] uppercase text-xs font-medium reveal-up">Our Heritage</p>
+            <h1 class="font-serif text-5xl md:text-7xl leading-tight reveal-up">Ancestral <br><span class="italic text-gold">Preservation.</span></h1>
+            <div class="w-[1px] h-24 bg-gold mx-auto reveal-up origin-top"></div>
+            
+            <div class="space-y-6 text-muted font-light text-lg leading-relaxed text-left md:text-center reveal-up">
+                <p>
+                    We don't sell a traditional life as a marketing gimmick. We invite you to support a lifestyle we never abandoned. 
+                    At Gaurya Farms, located in the heart of Chittorgarh, Rajasthan, our mission is to preserve the sacred bond between humanity, nature, and the indigenous Gir cow.
+                </p>
+                <p>
+                    For generations, our family has practiced the Bilona method—not because it became a trend, but because it is the only way we know how to honor the milk. It is a slow, methodical, and profoundly spiritual process that demands patience and uncompromising dedication.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 2: The Philosophy Grid -->
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 mb-32 items-center reveal-up">
+            <div class="bg-[#151515] p-12 border border-white/5 h-full flex flex-col justify-center">
+                <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold mb-4">The Philosophy</p>
+                <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6 text-alabaster">More than a business,<br><span class="italic text-white/50">it's a devotion.</span></h2>
+                <div class="space-y-4 text-muted font-light">
+                    <p>In an era of mass production and hyper-efficiency, we chose the path of resistance. True A2 Bilona Ghee cannot be rushed in a factory. It requires the gentle rhythm of hand-churning before dawn, the exact temperature of a slow-burning wood fire, and the silent, intuitive knowledge passed down through our ancestors.</p>
+                    <p>We restrict our batches deliberately. By focusing exclusively on this single craft, we ensure that every jar that leaves our farm carries the energetic signature of pure, unadulterated devotion.</p>
+                </div>
+            </div>
+            <div class="img-mask h-full min-h-[400px]">
+                <img src="assets/images/cow-tree.jpg" alt="Gir Cow at Gaurya Farms" class="w-full h-full object-cover parallax-img" data-speed="0.8">
+            </div>
+        </div>
+
+        <!-- Section 3: The Cows (Updated with cow-calf.jpg) -->
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 mb-32 items-center reveal-up">
+            <div class="order-2 md:order-1 img-mask h-full min-h-[400px]">
+                <img src="assets/images/cow-calf.jpg" alt="Gir Cow and Calf" class="w-full h-full object-cover parallax-img" data-speed="0.8">
+            </div>
+            <div class="order-1 md:order-2 space-y-8 text-left">
+                <h2 class="font-serif text-4xl leading-tight text-alabaster">Revering the <br><span class="italic text-gold">Gir Cow.</span></h2>
+                <div class="space-y-6 text-muted font-light text-lg leading-relaxed">
+                    <p>
+                        Our indigenous Gir cows are not livestock; they are the heart of our community. They graze freely on organic pastures under the Rajasthani sun. We follow the ancient 'Dohan' system—where the calf always receives its share of milk first, and only the surplus is taken for churning.
+                    </p>
+                    <p>
+                        This ethical, cruelty-free approach ensures that the milk is given out of abundance and love, translating into the high vibrational quality and medicinal properties of our final Bilona Ghee.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+                <!-- Section 4: The Founder's Vision -->
+        <div class="max-w-7xl mx-auto border-t border-white/5 pt-32 mt-24 mb-16 reveal-up">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+                
+                <!-- Image Column -->
+                <div class="md:col-span-5 img-mask h-[80vh] w-full">
+                    <img src="assets/images/nitika-devpura.jpg" alt="Nitika Devpura, Founder" class="w-full h-full object-cover parallax-img" data-speed="0.9">
+                </div>
+
+                <!-- Text Column -->
+                <div class="md:col-span-7 space-y-10 pl-0 md:pl-10">
+                    <svg class="w-12 h-12 text-gold/40 mb-10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    
+                    <div class="space-y-8 text-2xl md:text-3xl font-serif leading-snug text-alabaster">
+                        <p class="italic">"When did we all agree that 'faster' was better when it comes to the food we feed our families?"</p>
+                        <p class="text-white/80 text-xl md:text-2xl italic leading-relaxed">
+                            "Somewhere along the line, India was convinced that a factory-processed tub from a supermarket shelf was the same as what our Dadis and Nanis made with their hands. But deep down, every time you smell real, golden, slow-churned ghee, you know the difference."
+                        </p>
+                        <p class="text-white/80 text-xl md:text-2xl italic leading-relaxed">
+                            "We didn't start Gaurya Farms to give you a sustainability lecture or a wellness sermon. We started it as friends who went back to the village, unlearned the shortcuts, understood the science, and brought the original stuff back."
+                        </p>
+                        <p class="text-xl md:text-2xl italic text-gold">
+                            "You know better, and now you can do better. Here's to bringing the soul back to your kitchen."
+                        </p>
+                    </div>
+
+                    <div class="pt-8">
+                        <div class="w-16 h-[1px] bg-gold mb-6"></div>
+                        <p class="font-serif text-4xl text-alabaster tracking-wide">Nitika Devpura</p>
+                        <p class="text-sm tracking-[0.3em] uppercase text-gold font-bold mt-3">Founder, Gaurya Farms</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="md:col-span-1">
+                <img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-12 md:h-16 object-contain mb-6">
+                <p class="text-sm text-muted leading-relaxed font-light mb-6">Ancestral preservation in a jar.<br>100% pure A2 Gir cow bilona ghee, made ethically on our own farm.</p>
+            </div>
+            <div>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Shop</h4>
+                <ul class="space-y-4 text-sm font-light text-muted">
+                    <li><a href="https://gauryafarms.com/collections/all" class="hover:text-gold transition-colors">All Products</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Support</h4>
+                <ul class="space-y-4 text-sm font-light text-muted">
+                    <li><a href="contact.html" class="hover:text-gold transition-colors">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Contact</h4>
+                <ul class="space-y-4 text-sm font-light text-muted">
+                    <li><span class="block text-alabaster mb-1">Farm Address</span>Chittorgarh, Rajasthan 312001</li>
+                    <li class="pt-2"><span class="block text-alabaster mb-1">Phone</span><a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        
+        gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.5 });
+    </script>
+</body>
+</html>
+
+
+
