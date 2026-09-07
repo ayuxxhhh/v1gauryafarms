@@ -39,7 +39,7 @@
     </script>
     
     <style>
-        body { background-color: #1A1A1A; color: #FAF9F6; cursor: none; overflow-x: hidden; }
+        body { background-color: #1A1A1A; color: #FAF9F6; cursor: auto; overflow-x: hidden; }
         ::selection { background-color: #C5A059; color: white; }
 
         /* Custom Cursor */
@@ -65,8 +65,31 @@
         .reveal-mask { overflow: hidden; display: inline-block; }
         .reveal-text { display: inline-block; transform: translateY(110%); }
     </style>
+    <style>
+        .marquee-container {
+            display: flex;
+            width: 200%;
+            animation: marquee 30s linear infinite;
+        }
+        .marquee-container:hover {
+            animation-play-state: paused;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .review-card {
+            width: 350px;
+            flex-shrink: 0;
+        }
+    </style>
 </head>
-<body class="font-sans antialiased text-alabaster">
+<body class="cursor-auto bg-[#111111] text-alabaster antialiased selection:bg-gold selection:text-charcoal font-sans overflow-hidden">
+    <!-- PRELOADER -->
+    <div id="preloader" class="fixed inset-0 z-[200] bg-[#0a0a0a] flex flex-col items-center justify-center transition-transform duration-[1.2s] ease-[cubic-bezier(0.77,0,0.175,1)]">
+        <img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-16 md:h-20 mb-12 animate-pulse object-contain">
+        <button id="enter-btn" class="cursor-pointer border border-gold/50 text-gold px-12 py-4 tracking-[0.3em] uppercase text-xs hover:bg-gold hover:text-[#0a0a0a] transition-all duration-500 rounded-full">Enter</button>
+    </div>
 
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
@@ -110,16 +133,16 @@
         </section>
 
         <!-- CHAPTER I: THE SOURCE -->
-        <section class="min-h-screen py-24 px-6 flex items-center">
+        <section class="py-16 md:py-24 px-6 flex items-center">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 img-mask h-[60vh] w-full reveal-img">
+                <div class="order-2 lg:order-1 img-mask h-[40vh] md:h-[50vh] w-full reveal-img">
                     <img src="assets/images/cow-tree.jpg" alt="Indigenous Gir Cow" class="parallax-img" data-speed="0.8">
                 </div>
                                 <div class="order-1 lg:order-2 space-y-6">
                     <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 01</p>
                     <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">The Source.</h2>
                     <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
-                        It begins at the source. Pure A2 milk from indigenous, grass-fed Gir cows. No industrial shortcuts, no crowded feedlots — just a foundation of absolute, unyielding quality on our own farm.
+                        It begins at the source. Pure A2 milk from indigenous, grass-fed Gir cows. No industrial shortcuts, no crowded feedlots   just a foundation of absolute, unyielding quality on our own farm.
                     </p>
                     <div class="pt-6 chapter-body">
                         <button onclick="openGame()" class="group flex items-center space-x-4 text-sm tracking-[0.1em] uppercase text-alabaster hover:text-gold transition-colors">
@@ -133,7 +156,7 @@
         </section>
 
         <!-- CHAPTER II: THE CULTURING -->
-        <section class="min-h-screen py-24 px-6 flex items-center bg-[#151515]">
+        <section class="py-16 md:py-24 px-6 flex items-center bg-[#151515]">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="space-y-6">
                     <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 02</p>
@@ -142,23 +165,23 @@
                         We do not rush nature. The milk is slowly cultured into rich, earthen dahi overnight in traditional clay pots. Patience transforms the raw into the profound.
                     </p>
                 </div>
-                <div class="img-mask h-[60vh] w-full reveal-img">
+                <div class="img-mask h-[40vh] md:h-[50vh] w-full reveal-img">
                     <img src="assets/images/cow-calf.jpg" alt="Farm details" class="parallax-img" data-speed="0.8">
                 </div>
             </div>
         </section>
 
         <!-- CHAPTER III: THE CHURN -->
-        <section class="min-h-screen py-24 px-6 flex items-center">
+        <section class="py-16 md:py-24 px-6 flex items-center">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 img-mask h-[60vh] w-full reveal-img">
+                <div class="order-2 lg:order-1 img-mask h-[40vh] md:h-[50vh] w-full reveal-img">
                     <img src="assets/images/product-jar-wood.jpg" alt="A2 Bilona Ghee" class="parallax-img object-cover w-full h-full" data-speed="0.8">
                 </div>
                                 <div class="order-1 lg:order-2 space-y-6">
                     <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 01</p>
                     <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">The Source.</h2>
                     <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
-                        It begins at the source. Pure A2 milk from indigenous, grass-fed Gir cows. No industrial shortcuts, no crowded feedlots — just a foundation of absolute, unyielding quality on our own farm.
+                        It begins at the source. Pure A2 milk from indigenous, grass-fed Gir cows. No industrial shortcuts, no crowded feedlots   just a foundation of absolute, unyielding quality on our own farm.
                     </p>
                     <div class="pt-6 chapter-body">
                         <button onclick="openGame()" class="group flex items-center space-x-4 text-sm tracking-[0.1em] uppercase text-alabaster hover:text-gold transition-colors">
@@ -172,7 +195,7 @@
         </section>
 
         <!-- CHAPTER IV: THE CLARIFICATION -->
-        <section class="min-h-screen py-24 px-6 flex items-center bg-[#151515]">
+        <section class="py-16 md:py-24 px-6 flex items-center bg-[#151515]">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="space-y-6">
                     <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 04</p>
@@ -181,14 +204,14 @@
                         Slow-simmered over a gentle, open flame. As the heat rises, the liquid clarifies, revealing a golden, nutrient-dense nectar with an unmistakable, roasted aroma.
                     </p>
                 </div>
-                <div class="img-mask h-[60vh] w-full reveal-img">
+                <div class="img-mask h-[40vh] md:h-[50vh] w-full reveal-img">
                     <img src="assets/images/oil-bubbles.jpg" alt="Golden ghee" class="parallax-img" data-speed="0.8">
                 </div>
             </div>
         </section>
 
         <!-- OUR PURITY PROMISE -->
-        <section class="py-32 px-6 bg-charcoal text-center">
+        <section class="py-16 md:py-20 px-6 bg-charcoal text-center">
             <div class="max-w-7xl mx-auto">
                 <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-16 chapter-heading">Our Purity <span class="italic text-gold">Promise.</span></h2>
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-6 chapter-body">
@@ -217,7 +240,7 @@
         </section>
 
         <!-- HOW ITS MADE: BILONA METHOD -->
-        <section class="py-32 px-6 bg-[#111111] text-center text-alabaster overflow-hidden">
+        <section class="py-16 md:py-20 px-6 bg-[#111111] text-center text-alabaster overflow-hidden">
             <div class="max-w-7xl mx-auto">
                 <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-20 chapter-heading">How It's Made: <span class="italic text-gold">The Bilona Method</span></h2>
                 
@@ -287,7 +310,7 @@
         </section>
 
         <!-- COMPARISON SECTION -->
-        <section class="py-32 px-6 bg-[#151515]">
+        <section class="py-16 md:py-20 px-6 bg-[#151515]">
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-16">
                     <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold mb-4 chapter-step">Gaurya Farms vs Regular Ghee</p>
@@ -392,7 +415,7 @@
         </section>
 
         <!-- CTA YIELD -->
-        <section class="min-h-screen flex items-center justify-center py-32 px-6 text-center relative overflow-hidden">
+        <section class="min-h-screen flex items-center justify-center py-16 md:py-20 px-6 text-center relative overflow-hidden">
                         <div class="absolute inset-0 z-0 img-mask opacity-40">
                 <img src="assets/images/cow-flowers.jpg" class="w-full h-full object-cover parallax-img" alt="Gaurya Farms A2 Ghee" data-speed="0.3">
                 <div class="absolute inset-0 bg-charcoal/80"></div>
@@ -401,8 +424,68 @@
 
                 
 
-        <!-- FOOTER -->
-        <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6">
+            <!-- REVIEWS MARQUEE -->
+    <section class="py-20 bg-[#0a0a0a] border-t border-white/5 overflow-hidden relative">
+        <div class="text-center mb-12">
+            <h2 class="font-serif text-3xl md:text-4xl text-alabaster">Loved by <span class="italic text-gold">Thousands</span></h2>
+            <p class="text-sm text-muted mt-2 font-light">Real reviews from families across India.</p>
+        </div>
+        
+        <div class="relative w-full">
+            <!-- Fade edges -->
+            <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10"></div>
+            <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10"></div>
+            
+            <div class="marquee-container space-x-6 px-6">
+                <!-- Group 1 -->
+                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
+                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"Finally found real A2 ghee that smells and tastes like what my grandmother used to make. The bilona method makes a huge difference."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">R</div>
+                        <div><p class="text-sm font-medium">Rahul S.</p><p class="text-xs text-muted">Verified Buyer</p></div>
+                    </div>
+                </div>
+                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
+                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"My digestion has improved significantly since switching. You can literally feel the purity. The texture is grainy, just like authentic ghee should be."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">P</div>
+                        <div><p class="text-sm font-medium">Priya M.</p><p class="text-xs text-muted">Verified Buyer</p></div>
+                    </div>
+                </div>
+                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
+                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"Premium packaging and incredible aroma. It adds so much flavor to my cooking. Highly recommend Gaurya Farms!"</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">A</div>
+                        <div><p class="text-sm font-medium">Amit D.</p><p class="text-xs text-muted">Verified Buyer</p></div>
+                    </div>
+                </div>
+                
+                <!-- Group 2 (Duplicate for seamless loop) -->
+                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
+                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"Finally found real A2 ghee that smells and tastes like what my grandmother used to make. The bilona method makes a huge difference."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">R</div>
+                        <div><p class="text-sm font-medium">Rahul S.</p><p class="text-xs text-muted">Verified Buyer</p></div>
+                    </div>
+                </div>
+                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
+                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"My digestion has improved significantly since switching. You can literally feel the purity. The texture is grainy, just like authentic ghee should be."</p>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">P</div>
+                        <div><p class="text-sm font-medium">Priya M.</p><p class="text-xs text-muted">Verified Buyer</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- FOOTER -->
+        <footer class="cursor-auto bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                 <!-- Brand -->
                 <div class="md:col-span-1">
@@ -523,6 +606,31 @@
 
         // Other GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
+        const enterBtn = document.getElementById('enter-btn');
+        if(enterBtn) {
+            enterBtn.addEventListener('click', () => {
+                document.getElementById('preloader').style.transform = 'translateY(-100%)';
+                document.body.classList.remove('overflow-hidden');
+            });
+        }
+
+        // Hero Scroll Animation (Jar filling up)
+        const heroTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#hero-sequence",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        });
+
+        heroTl.to("#hero-text", { opacity: 0, y: -50, duration: 1 })
+              .to("#hero-overlay", { backgroundColor: "rgba(0,0,0,0.8)", duration: 1 }, "<")
+              .to("#hero-bg-img", { scale: 1.1, duration: 3 }, "<")
+              .to("#hero-jar-container", { opacity: 1, scale: 1, duration: 0.5 }, "-=2.5")
+              .to("#hero-liquid", { height: "100%", duration: 1.5 }, "-=2")
+              .to("#jar-text", { opacity: 0, duration: 0.5 }, "-=0.5")
+              .to("#hero-jar-container", { opacity: 0, scale: 1.2, duration: 0.5 });
         
         // Sync Lenis with GSAP
         lenis.on('scroll', ScrollTrigger.update);
@@ -708,6 +816,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
