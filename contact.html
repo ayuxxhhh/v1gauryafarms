@@ -36,7 +36,7 @@
         .reveal-up { opacity: 0; transform: translateY(30px); }
     </style>
 </head>
-<body class="font-sans antialiased text-alabaster">
+<body class="font-sans antialiased text-[#111]">
 
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
@@ -44,14 +44,14 @@
     <!-- Header Navigation -->
     <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
+            <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/Gaurya Farms Logo (New).svg" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
             <div class="hidden md:flex space-x-8 items-center">
-                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Home</a>
-                <a href="https://gauryafarms.com/collections/all" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
-                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Our Story</a>
-                <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Lab Report</a>
+                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Home</a>
+                <a href="https://gauryafarms.com/collections/all" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Shop</a>
+                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Our Story</a>
+                <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Lab Report</a>
                 <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Contact</a>
-                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
+                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
             </div>
         </div>
     </header>
@@ -71,18 +71,18 @@
                         </div>
                         
                         <div>
-                            <span class="block text-xs tracking-widest uppercase text-alabaster font-bold mb-1">Visit The Farm</span>
+                            <span class="block text-xs tracking-widest uppercase text-[#111] font-bold mb-1">Visit The Farm</span>
                             Jalday Vibhag Ke Store Pass, Tejaji Ka Chouk Road, Pratap Nagar, Chittorgarh, Rajasthan 312001
                         </div>
                         <div>
-                            <span class="block text-xs tracking-widest uppercase text-alabaster font-bold mb-1">Direct Line</span>
+                            <span class="block text-xs tracking-widest uppercase text-[#111] font-bold mb-1">Direct Line</span>
                             <a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-[#151515] p-8 md:p-12 border border-white/5 reveal-up relative overflow-hidden">
+            <div class="bg-[var(--bg-subtle)] p-8 md:p-12 border border-white/5 reveal-up relative overflow-hidden">
                 <form id="contact-form" class="space-y-8" action="#" method="POST" onsubmit="event.preventDefault(); animateSeal();">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
@@ -116,7 +116,7 @@
             </div>
                 <div class="mt-12 text-center">
                     <p class="text-sm text-muted mb-4 font-light">Waiting for our reply?</p>
-                    <button type="button" onclick="openWhackGame()" class="inline-flex items-center space-x-2 text-gold hover:text-white transition-colors border border-gold/30 px-6 py-2 rounded-full text-xs tracking-[0.2em] uppercase">
+                    <button type="button" onclick="openWhackGame()" class="inline-flex items-center space-x-2 text-gold hover:text-[#1A1A1A] transition-colors border border-gold/30 px-6 py-2 rounded-full text-xs tracking-[0.2em] uppercase">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         <span>Play Whack-a-Cow</span>
                     </button>
@@ -204,18 +204,18 @@
 <script src="assets/js/minigames.js"></script>
     <!-- WHACK-A-COW MODAL -->
     <div id="whackModal" class="fixed inset-0 z-[100] bg-charcoal/95 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-500">
-        <button onclick="closeWhackGame()" class="absolute top-8 right-8 text-white hover:text-gold transition-colors">
+        <button onclick="closeWhackGame()" class="absolute top-8 right-8 text-[#1A1A1A] hover:text-gold transition-colors">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
         <div class="text-center mb-6">
-            <h2 class="font-serif text-4xl text-alabaster mb-2">Whack-a-<span class="text-gold italic">Cow</span></h2>
+            <h2 class="font-serif text-4xl text-[#111] mb-2">Whack-a-<span class="text-gold italic">Cow</span></h2>
             <p class="text-sm text-muted font-light">Click the Gir Cows as they pop up from the fields!</p>
         </div>
         <div class="relative w-full max-w-[800px] h-[500px] border border-gold/30 rounded-lg overflow-hidden bg-[#1A1A1A] shadow-[0_0_50px_rgba(197,160,89,0.15)]">
             <canvas id="whackCanvas" width="800" height="500" class="w-full h-full cursor-crosshair block"></canvas>
             <div id="whackOverlay" class="absolute inset-0 bg-black/80 flex items-center justify-center flex-col z-10 cursor-pointer transition-opacity duration-300">
                 <span class="text-gold text-4xl font-serif italic mb-4" id="whackTitle">Click to Start</span>
-                <span class="text-white/70 text-xl font-light" id="whackScoreText">High Score: 0</span>
+                <span class="text-themed-muted text-xl font-light" id="whackScoreText">High Score: 0</span>
             </div>
         </div>
     </div>
@@ -339,6 +339,7 @@
     </script>
 </body>
 </html>
+
 
 
 
