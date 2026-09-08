@@ -23,45 +23,43 @@
     </script>
     
     <style>
-        body { background-color: #1A1A1A; color: #FAF9F6; cursor: auto; overflow-x: hidden; }
-        ::selection { background-color: #C5A059; color: white; }
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
-        .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
-        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
-        html.lenis, html.lenis body { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+                /* --- THEME VARIABLES (PURE LIGHT MODE) --- */
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #f0ede8;
+            --bg-tertiary: #e8e4dd;
+            --bg-card: #ffffff;
+            --bg-subtle: #f5f3ef;
+            --text-primary: #1A1A1A;
+            --text-muted: rgba(0,0,0,0.6);
+            --text-faint: rgba(0,0,0,0.4);
+            --border-color: rgba(0,0,0,0.08);
+            --border-hover: rgba(197,160,89,0.6);
+        }
+        body { background-color: var(--bg-primary); color: var(--text-primary); transition: background-color 0.4s, color 0.4s; }
         
-        .reveal-up { opacity: 0; transform: translateY(30px); }
-        .accordion-content { overflow: hidden; max-height: 0; transition: max-height 0.4s ease-out; }
-            /* Hide scrollbar for Chrome, Safari and Opera */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .scrollbar-hide {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-    </style>
+        .text-themed { color: var(--text-primary); }
+        .text-themed-muted { color: var(--text-muted); }
+        .text-themed-faint { color: var(--text-faint); }
+        </style>
 </head>
-<body class="font-sans antialiased text-alabaster">
+<body class="font-sans antialiased text-themed">
 
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
 
     <!-- Header Navigation -->
-    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
+    <header class="fixed w-full top-0 z-50 bg-[var(--bg-card)]/80 backdrop-blur-md border-b border-[var(--border-color)]">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
+            <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/Gaurya Farms Logo (New).svg" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
             <div class="hidden md:flex space-x-8 items-center">
-                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Home</a>
+                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-themed hover:text-gold transition-colors">Home</a>
                 <a href="product.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Shop</a>
-                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Our Story</a>
-                <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Lab Report</a>
-                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Contact</a>
-                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
+                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-themed hover:text-gold transition-colors">Our Story</a>
+                <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-themed hover:text-gold transition-colors">Lab Report</a>
+                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-themed hover:text-gold transition-colors">Contact</a>
+                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-themed hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
             </div>
         </div>
     </header>
@@ -73,13 +71,13 @@
             <div class="w-full lg:w-1/2 relative z-20">
                 <div class="sticky top-32 w-full flex flex-col gap-4 reveal-up">
                     <!-- Main Image -->
-                    <div class="w-full h-[60vh] bg-[#151515] overflow-hidden rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/5 relative group cursor-crosshair">
-                        <img id="main-product-image" src="assets/images/Artboard 1.jpg" class="w-full h-full object-cover transition-opacity duration-300">
+                    <div class="w-full h-[60vh] bg-[var(--bg-subtle)] overflow-hidden rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[var(--border-color)] relative group cursor-crosshair">
+                        <img id="main-product-image" src="assets/images/Artboard 8.png" class="w-full h-full object-cover transition-opacity duration-300">
                     </div>
                     <!-- Thumbnails -->
                     <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x pt-2">
                         <button onclick="document.getElementById('main-product-image').src='assets/images/Artboard 1.jpg'" class="shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold transition-colors focus:outline-none focus:border-gold snap-start">
-                            <img src="assets/images/Artboard 1.jpg" class="w-full h-full object-cover">
+                            <img src="assets/images/Artboard 8.png" class="w-full h-full object-cover">
                         </button>
                         <button onclick="document.getElementById('main-product-image').src='assets/images/Artboard 2.png'" class="shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold transition-colors focus:outline-none focus:border-gold snap-start">
                             <img src="assets/images/Artboard 2.png" class="w-full h-full object-cover">
@@ -119,55 +117,55 @@
                         </div>
                         <span class="text-sm text-gold">9 reviews</span>
                     </div>
-                    <h1 class="font-serif text-4xl md:text-5xl leading-tight text-alabaster">A2 Gir Cow<br>Bilona Ghee.</h1>
+                    <h1 class="font-serif text-4xl md:text-5xl leading-tight text-themed">A2 Gir Cow<br>Bilona Ghee.</h1>
                     
                     <div class="flex items-center space-x-3 pt-2">
-                        <span class="text-xs text-white/50 uppercase tracking-widest">From</span>
-                        <span class="text-3xl font-light text-alabaster" id="display-price">₹ 699.00</span>
+                        <span class="text-xs text-themed-faint uppercase tracking-widest">From</span>
+                        <span class="text-3xl font-light text-themed" id="display-price">₹ 699.00</span>
                         <span class="text-xs font-bold bg-[#4a2e2b] text-[#ffd5d1] px-3 py-1 rounded">Enjoy Up to 30% OFF</span>
                     </div>
-                    <p class="text-xs text-white/40 font-light">Inclusive of all taxes.</p>
+                    <p class="text-xs text-themed/40 font-light">Inclusive of all taxes.</p>
                 </div>
 
                 <!-- Process Highlights -->
-                <div class="grid grid-cols-4 gap-2 text-center text-[10px] text-white/70 uppercase tracking-wider reveal-up">
-                    <div class="flex flex-col items-center space-y-2"><div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center bg-[#151515]"><svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg></div><span>Bilona<br>Churned</span></div>
-                    <div class="flex flex-col items-center space-y-2"><div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center bg-[#151515]"><svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div><span>Cultured<br>Butter</span></div>
-                    <div class="flex flex-col items-center space-y-2"><div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center bg-[#151515]"><svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg></div><span>Slow<br>Flamed</span></div>
-                    <div class="flex flex-col items-center space-y-2"><div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center bg-[#151515]"><svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><span>100% Pure<br>& Natural</span></div>
+                <div class="grid grid-cols-4 gap-2 text-center text-[10px] text-themed-muted uppercase tracking-wider reveal-up">
+                    <div class="flex flex-col items-center space-y-2"><div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center bg-[var(--bg-subtle)]"><svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg></div><span>Bilona<br>Churned</span></div>
+                    <div class="flex flex-col items-center space-y-2"><div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center bg-[var(--bg-subtle)]"><svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div><span>Cultured<br>Butter</span></div>
+                    <div class="flex flex-col items-center space-y-2"><div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center bg-[var(--bg-subtle)]"><svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg></div><span>Slow<br>Flamed</span></div>
+                    <div class="flex flex-col items-center space-y-2"><div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center bg-[var(--bg-subtle)]"><svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div><span>100% Pure<br>& Natural</span></div>
                 </div>
 
                 <!-- Choose Variant with Gamification -->
                 <div class="space-y-4 reveal-up">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-sm font-bold text-alabaster tracking-widest uppercase">Choose Variant</h3>
+                        <h3 class="text-sm font-bold text-themed tracking-widest uppercase">Choose Variant</h3>
                     </div>
                     <div class="grid grid-cols-2 gap-4" id="sku-grid">
                         <button class="sku-btn relative border border-gold bg-gold/10 rounded-lg p-4 text-left transition-all duration-300 overflow-hidden group" data-tier="250" data-price="699.00" data-old="1,350.00">
-                            <span class="block text-sm text-white/80 mb-1 font-bold">250ml</span>
-                            <span class="block text-xl font-serif text-alabaster">₹ 699.00 <span class="text-xs text-white/40 line-through ml-1">₹ 1,350.00</span></span>
+                            <span class="block text-sm text-themed/80 mb-1 font-bold">250ml</span>
+                            <span class="block text-xl font-serif text-themed">₹ 699.00 <span class="text-xs text-themed/40 line-through ml-1">₹ 1,350.00</span></span>
                             <div class="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                         </button>
-                        <button class="sku-btn relative border border-white/20 bg-[#151515] hover:border-gold/50 rounded-lg p-4 text-left transition-all duration-300 overflow-hidden group" data-tier="500" data-price="1,299.00" data-old="2,500.00">
-                            <span class="block text-sm text-white/80 mb-1 font-bold">500ml</span>
-                            <span class="block text-xl font-serif text-alabaster">₹ 1,299.00 <span class="text-xs text-white/40 line-through ml-1">₹ 2,500.00</span></span>
+                        <button class="sku-btn relative border border-white/20 bg-[var(--bg-subtle)] hover:border-gold/50 rounded-lg p-4 text-left transition-all duration-300 overflow-hidden group" data-tier="500" data-price="1,299.00" data-old="2,500.00">
+                            <span class="block text-sm text-themed/80 mb-1 font-bold">500ml</span>
+                            <span class="block text-xl font-serif text-themed">₹ 1,299.00 <span class="text-xs text-themed/40 line-through ml-1">₹ 2,500.00</span></span>
                             <div class="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                         </button>
-                        <button class="sku-btn relative border border-white/20 bg-[#151515] hover:border-gold/50 rounded-lg p-4 text-left transition-all duration-300 overflow-hidden group" data-tier="1000" data-price="2,499.00" data-old="4,500.00">
-                            <span class="block text-sm text-white/80 mb-1 font-bold">1000ml</span>
-                            <span class="block text-xl font-serif text-alabaster">₹ 2,499.00 <span class="text-xs text-white/40 line-through ml-1">₹ 4,500.00</span></span>
+                        <button class="sku-btn relative border border-white/20 bg-[var(--bg-subtle)] hover:border-gold/50 rounded-lg p-4 text-left transition-all duration-300 overflow-hidden group" data-tier="1000" data-price="2,499.00" data-old="4,500.00">
+                            <span class="block text-sm text-themed/80 mb-1 font-bold">1000ml</span>
+                            <span class="block text-xl font-serif text-themed">₹ 2,499.00 <span class="text-xs text-themed/40 line-through ml-1">₹ 4,500.00</span></span>
                             <div class="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                         </button>
-                        <button class="sku-btn relative border border-white/20 bg-[#151515] hover:border-gold/50 rounded-lg p-4 text-left transition-all duration-300 overflow-hidden group" data-tier="5000" data-price="10,399.00" data-old="14,999.00">
-                            <span class="block text-sm text-white/80 mb-1 font-bold">5l</span>
-                            <span class="block text-xl font-serif text-alabaster">₹ 10,399.00 <span class="text-xs text-white/40 line-through ml-1">₹ 14,999.00</span></span>
+                        <button class="sku-btn relative border border-white/20 bg-[var(--bg-subtle)] hover:border-gold/50 rounded-lg p-4 text-left transition-all duration-300 overflow-hidden group" data-tier="5000" data-price="10,399.00" data-old="14,999.00">
+                            <span class="block text-sm text-themed/80 mb-1 font-bold">5l</span>
+                            <span class="block text-xl font-serif text-themed">₹ 10,399.00 <span class="text-xs text-themed/40 line-through ml-1">₹ 14,999.00</span></span>
                             <div class="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                         </button>
                     </div>
                     
                     <!-- Interactive Gamification Toast -->
                     <div id="reward-toast" class="h-10 flex items-center opacity-0 transform translate-y-2 transition-all duration-500 pointer-events-none">
-                        <div class="inline-flex items-center space-x-3 bg-[#111] border border-gold/30 px-4 py-2 rounded-full shadow-[0_0_15px_rgba(197,160,89,0.2)]">
+                        <div class="inline-flex items-center space-x-3 bg-white border border-gold/30 px-4 py-2 rounded-full shadow-[0_0_15px_rgba(197,160,89,0.2)]">
                             <span id="reward-icon" class="text-lg">?</span>
                             <span id="reward-text" class="text-xs font-bold text-gold tracking-widest uppercase">Perk Unlocked</span>
                         </div>
@@ -176,19 +174,19 @@
 
                 <!-- Add to Cart / Order Now -->
                 <div class="space-y-4 reveal-up">
-                    <p class="text-xs uppercase tracking-widest text-alabaster font-bold">Quantity</p>
+                    <p class="text-xs uppercase tracking-widest text-themed font-bold">Quantity</p>
                     <div class="flex items-center space-x-4">
-                        <div class="flex border border-white/20 bg-[#151515] rounded overflow-hidden">
-                            <button class="px-5 py-3 text-white hover:bg-white/10 transition-colors">-</button>
-                            <input type="text" value="1" class="w-12 bg-transparent text-center text-alabaster font-bold outline-none pointer-events-none" readonly>
-                            <button class="px-5 py-3 text-white hover:bg-white/10 transition-colors">+</button>
+                        <div class="flex border border-white/20 bg-[var(--bg-subtle)] rounded overflow-hidden">
+                            <button class="px-5 py-3 text-themed hover:bg-white/10 transition-colors">-</button>
+                            <input type="text" value="1" class="w-12 bg-transparent text-center text-themed font-bold outline-none pointer-events-none" readonly>
+                            <button class="px-5 py-3 text-themed hover:bg-white/10 transition-colors">+</button>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4 pt-4">
                         <button class="w-full bg-[#E5B962] hover:bg-[#d4a852] text-[#111] transition-colors duration-300 py-4 tracking-[0.1em] uppercase text-sm font-bold rounded">
                             Add to Cart
                         </button>
-                        <button class="w-full bg-[#9DA88B] hover:bg-[#8d987b] text-white transition-colors duration-300 py-4 tracking-[0.1em] uppercase text-sm font-bold flex items-center justify-center space-x-2 rounded">
+                        <button class="w-full bg-[#9DA88B] hover:bg-[#8d987b] text-themed transition-colors duration-300 py-4 tracking-[0.1em] uppercase text-sm font-bold flex items-center justify-center space-x-2 rounded">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             <span>Order Now</span>
                         </button>
@@ -196,20 +194,20 @@
                 </div>
 
                 <!-- Lab Report Tag -->
-                <div class="mt-6 pt-6 border-t border-white/10 flex items-center justify-between reveal-up group">
+                <div class="mt-6 pt-6 border-t border-[var(--border-color)] flex items-center justify-between reveal-up group">
                     <div class="flex items-center space-x-3">
                         <div class="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-gold group-hover:bg-gold group-hover:text-[#111] transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                         </div>
                         <div>
                             <div class="flex items-center space-x-2">
-                                <span class="text-sm font-bold text-alabaster">Lab-tested purity</span>
+                                <span class="text-sm font-bold text-themed">Lab-tested purity</span>
                                 <span class="text-[9px] font-bold tracking-widest uppercase bg-[#FDE68A] text-[#92400E] px-2 py-0.5 rounded-sm">Verified</span>
                             </div>
-                            <p class="text-xs text-white/50">Purity report available</p>
+                            <p class="text-xs text-themed-faint">Purity report available</p>
                         </div>
                     </div>
-                    <a href="assets/documents/Gaurya-Farms-Lab-Report.pdf" download class="flex items-center space-x-1 text-gold hover:text-white transition-colors text-xs font-bold uppercase tracking-widest relative overflow-hidden">
+                    <a href="assets/documents/Gaurya-Farms-Lab-Report.pdf" download class="flex items-center space-x-1 text-gold hover:text-themed transition-colors text-xs font-bold uppercase tracking-widest relative overflow-hidden">
                         <span>View PDF</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     </a>
@@ -256,9 +254,9 @@
                                 // Update Active State
                                 skuBtns.forEach(b => {
                                     b.classList.remove('border-gold', 'bg-gold/10');
-                                    b.classList.add('border-white/20', 'bg-[#151515]');
+                                    b.classList.add('border-white/20', 'bg-[var(--bg-subtle)]');
                                 });
-                                btn.classList.remove('border-white/20', 'bg-[#151515]');
+                                btn.classList.remove('border-white/20', 'bg-[var(--bg-subtle)]');
                                 btn.classList.add('border-gold', 'bg-gold/10');
 
                                 // Update Price
@@ -301,8 +299,8 @@
                     });
                 </script>
 <!-- Accordions -->
-                <div class="pt-10 border-t border-white/10 space-y-2 reveal-up">
-                    <div class="border-b border-white/10">
+                <div class="pt-10 border-t border-[var(--border-color)] space-y-2 reveal-up">
+                    <div class="border-b border-[var(--border-color)]">
                         <button class="w-full flex justify-between items-center py-4 text-sm uppercase tracking-widest hover:text-gold transition-colors" onclick="toggleAccordion('acc1')">
                             The Ancestral Process
                             <span id="icon-acc1" class="text-gold text-lg">+</span>
@@ -313,7 +311,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="border-b border-white/10">
+                    <div class="border-b border-[var(--border-color)]">
                         <button class="w-full flex justify-between items-center py-4 text-sm uppercase tracking-widest hover:text-gold transition-colors" onclick="toggleAccordion('acc2')">
                             Shipping & Delivery
                             <span id="icon-acc2" class="text-gold text-lg">+</span>
@@ -333,42 +331,42 @@
 
         
 </div><!-- FOOTER -->
-    <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6 mt-12">
+    <footer class="bg-[var(--bg-subtle)] border-t border-[var(--border-color)] pt-20 pb-10 px-6 mt-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div class="md:col-span-1">
-                <img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-12 md:h-16 object-contain mb-6">
+                <img src="./assets/images/Gaurya Farms Logo (New).svg" alt="Gaurya Farms" class="h-12 md:h-16 object-contain mb-6">
                 <p class="text-sm text-muted leading-relaxed font-light mb-6">Ancestral preservation in a jar.<br>100% pure A2 Gir cow bilona ghee, made ethically on our own farm.</p>
             </div>
             <div>
-                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Shop</h4>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-themed font-bold mb-6">Shop</h4>
                 <ul class="space-y-4 text-sm font-light text-muted">
                     <li><a href="product.html" class="hover:text-gold transition-colors">A2 Bilona Ghee</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Support</h4>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-themed font-bold mb-6">Support</h4>
                 <ul class="space-y-4 text-sm font-light text-muted">
                     <li><a href="contact.html" class="hover:text-gold transition-colors">Contact Us</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Contact</h4>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-themed font-bold mb-6">Contact</h4>
                 <ul class="space-y-4 text-sm font-light text-muted">
-                    <li><span class="block text-alabaster mb-1">Farm Address</span>Chittorgarh, Rajasthan 312001</li>
-                    <li class="pt-2"><span class="block text-alabaster mb-1">Phone</span><a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a></li>
+                    <li><span class="block text-themed mb-1">Farm Address</span>Chittorgarh, Rajasthan 312001</li>
+                    <li class="pt-2"><span class="block text-themed mb-1">Phone</span><a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 
     <!-- REWARD MODAL (Gamification) -->
-    <div id="reward-modal" class="fixed inset-0 z-[100] bg-[#111111]/90 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-1000">
-        <div class="bg-[#1A1A1A] border border-gold p-12 max-w-lg text-center shadow-[0_0_50px_rgba(197,160,89,0.2)] rounded-sm transform scale-95 transition-transform duration-1000" id="reward-box">
+    <div id="reward-modal" class="fixed inset-0 z-[100] bg-[var(--bg-subtle)]/90 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-1000">
+        <div class="bg-[var(--bg-card)] border border-gold p-12 max-w-lg text-center shadow-[0_0_50px_rgba(197,160,89,0.2)] rounded-sm transform scale-95 transition-transform duration-1000" id="reward-box">
             <svg class="w-16 h-16 text-gold mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.5c-3.59 0-6.5-2.91-6.5-6.5 0-3.35 4.39-9.92 5.92-12.08.28-.39.87-.39 1.15 0 1.53 2.16 5.93 8.73 5.93 12.08 0 3.59-2.91 6.5-6.5 6.5z"/></svg>
             <h2 class="font-serif text-3xl mb-4 text-gold italic">The Artisan's Secret</h2>
             <p class="text-muted font-light mb-8">You have found all 3 Golden Drops hidden across our farm. As a reward for your curiosity, enjoy 10% off your first batch.</p>
-            <div class="border border-gold/30 bg-[#151515] py-4 px-8 inline-block mb-8">
-                <span class="text-2xl font-mono text-alabaster tracking-widest select-all">ANCESTRAL10</span>
+            <div class="border border-gold/30 bg-[var(--bg-subtle)] py-4 px-8 inline-block mb-8">
+                <span class="text-2xl font-mono text-themed tracking-widest select-all">ANCESTRAL10</span>
             </div>
             <br>
             <button onclick="closeReward()" class="text-xs tracking-widest uppercase text-muted hover:text-gold transition-colors">Close</button>
@@ -376,17 +374,25 @@
     </div>
 
     <style>
-        .drop-gamification.found { display: none !important; }
-            /* Hide scrollbar for Chrome, Safari and Opera */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+                /* --- THEME VARIABLES (PURE LIGHT MODE) --- */
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #f0ede8;
+            --bg-tertiary: #e8e4dd;
+            --bg-card: #ffffff;
+            --bg-subtle: #f5f3ef;
+            --text-primary: #1A1A1A;
+            --text-muted: rgba(0,0,0,0.6);
+            --text-faint: rgba(0,0,0,0.4);
+            --border-color: rgba(0,0,0,0.08);
+            --border-hover: rgba(197,160,89,0.6);
         }
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .scrollbar-hide {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-    </style>
+        body { background-color: var(--bg-primary); color: var(--text-primary); transition: background-color 0.4s, color 0.4s; }
+        
+        .text-themed { color: var(--text-primary); }
+        .text-themed-muted { color: var(--text-muted); }
+        .text-themed-faint { color: var(--text-faint); }
+        </style>
 
     <script>
         const cursorDot = document.getElementById('cursor-dot');
@@ -428,7 +434,7 @@
                 gsap.to(element, { scale: 3, opacity: 0, duration: 0.6, ease: "back.in" });
                 
                 const toast = document.createElement('div');
-                toast.className = 'fixed bottom-10 right-10 bg-[#1A1A1A] border border-gold text-gold px-6 py-4 font-serif italic text-lg z-[9999] opacity-0 shadow-lg';
+                toast.className = 'fixed bottom-10 right-10 bg-[var(--bg-card)] border border-gold text-gold px-6 py-4 font-serif italic text-lg z-[9999] opacity-0 shadow-lg';
                 toast.innerHTML = `<span class="font-sans text-xs uppercase tracking-widest block text-muted mb-1 font-bold">Secret Unlocked</span>Golden Drop Found (${foundDrops.length}/3)`;
                 document.body.appendChild(toast);
                 
@@ -459,137 +465,16 @@
             setTimeout(showRewardModal, 2000);
         }
     </script>
-<script src="assets/js/minigames.js"></script>
-    <!-- CATCH THE GHEE MODAL -->
-    <div id="catchModal" class="fixed inset-0 z-[100] bg-charcoal/95 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-500">
-        <button onclick="closeCatchGame()" class="absolute top-8 right-8 text-white hover:text-gold transition-colors">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
-        <div class="text-center mb-6">
-            <h2 class="font-serif text-4xl text-alabaster mb-2">Catch the <span class="text-gold italic">Drops</span></h2>
-            <p class="text-sm text-muted font-light">Move your mouse to catch pure Bilona ghee. Score 20 for a discount!</p>
-        </div>
-        <div class="relative w-full max-w-[800px] h-[500px] border border-gold/30 rounded-lg overflow-hidden bg-[#1A1A1A] shadow-[0_0_50px_rgba(197,160,89,0.15)]">
-            <canvas id="catchCanvas" width="800" height="500" class="w-full h-full cursor-none block"></canvas>
-            <div id="catchOverlay" class="absolute inset-0 bg-black/80 flex items-center justify-center flex-col z-10 cursor-pointer transition-opacity duration-300">
-                <span class="text-gold text-4xl font-serif italic mb-4" id="catchTitle">Click to Start</span>
-                <span class="text-white/70 text-xl font-light" id="catchScoreText">High Score: 0</span>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        let catchLoopId;
-        function openCatchGame() {
-            const modal = document.getElementById('catchModal');
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.remove('opacity-0'), 50);
-            document.body.style.overflow = 'hidden';
-            initCatchGhee();
-        }
-        
-        function closeCatchGame() {
-            const modal = document.getElementById('catchModal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-                cancelAnimationFrame(catchLoopId);
-            }, 500);
-        }
 
-        function initCatchGhee() {
-            const canvas = document.getElementById('catchCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            const overlay = document.getElementById('catchOverlay');
-            const title = document.getElementById('catchTitle');
-            const scoreText = document.getElementById('catchScoreText');
-
-            let state = { game: 1, over: 2, current: 0 };
-            let score = 0, best = 0, lives = 3;
-            let drops = [];
-            
-            const bucket = { x: 350, y: 450, w: 80, h: 50 };
-
-            canvas.onmousemove = (e) => {
-                let rect = canvas.getBoundingClientRect();
-                bucket.x = e.clientX - rect.left - bucket.w/2;
-            };
-
-            function addDrop() {
-                drops.push({ x: Math.random() * (canvas.width - 20) + 10, y: -20, radius: 10, speed: 3 + Math.random()*4 });
-            }
-
-            function draw() {
-                ctx.fillStyle = '#1A1A1A'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = '#8C8C8C';
-                ctx.beginPath();
-                ctx.moveTo(bucket.x, bucket.y);
-                ctx.lineTo(bucket.x + bucket.w, bucket.y);
-                ctx.lineTo(bucket.x + bucket.w - 15, bucket.y + bucket.h);
-                ctx.lineTo(bucket.x + 15, bucket.y + bucket.h);
-                ctx.fill();
-
-                ctx.fillStyle = '#c5a059';
-                for(let d of drops) {
-                    ctx.beginPath(); ctx.arc(d.x, d.y, d.radius, 0, Math.PI*2); ctx.fill();
-                    ctx.beginPath(); ctx.moveTo(d.x - d.radius, d.y); ctx.lineTo(d.x, d.y - d.radius*2); ctx.lineTo(d.x + d.radius, d.y); ctx.fill();
-                }
-
-                ctx.fillStyle = '#fff'; ctx.font = '24px serif';
-                ctx.fillText("Score: " + score, 20, 40);
-                ctx.fillText("Lives: " + lives, canvas.width - 100, 40);
-            }
-
-            function update() {
-                if(state.current !== state.game) return;
-                
-                if(Math.random() < 0.03 + (score * 0.001)) addDrop();
-
-                for(let i = drops.length-1; i >= 0; i--) {
-                    let d = drops[i];
-                    d.y += d.speed;
-                    
-                    if (d.y + d.radius >= bucket.y && d.y <= bucket.y + bucket.h && d.x >= bucket.x && d.x <= bucket.x + bucket.w) {
-                        score++; drops.splice(i, 1);
-                        if(score === 20) {
-                            state.current = state.over;
-                            best = Math.max(score, best);
-                            overlay.style.opacity = '1'; overlay.style.pointerEvents = 'auto';
-                            title.innerText = "You Won 10% Off! Code: GHEE10";
-                            scoreText.innerText = "Score: " + score;
-                        }
-                    } 
-                    else if (d.y > canvas.height) {
-                        drops.splice(i, 1); lives--;
-                        if(lives <= 0) {
-                            state.current = state.over;
-                            best = Math.max(score, best);
-                            overlay.style.opacity = '1'; overlay.style.pointerEvents = 'auto';
-                            title.innerText = "Game Over";
-                            scoreText.innerText = "Score: " + score + " | High: " + best;
-                        }
-                    }
-                }
-            }
-
-            function loop() { draw(); update(); catchLoopId = requestAnimationFrame(loop); }
-            
-            function start(e) {
-                if(e){ e.preventDefault(); e.stopPropagation(); }
-                state.current = state.game; score = 0; lives = 3; drops = [];
-                overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
-            }
-            overlay.onmousedown = start;
-            
-            cancelAnimationFrame(catchLoopId);
-            loop();
-        }
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
