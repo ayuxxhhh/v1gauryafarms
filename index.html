@@ -4,17 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaurya Farms | The Ancestral Method</title>
-    <meta name="description" content="Experience the raw documentary blueprint for Gaurya Farms. Pure A2 Gir Cow Ghee.">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <!-- GSAP & Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
@@ -23,803 +17,556 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Inter"', 'sans-serif'],
-                    },
-                    colors: {
-                        charcoal: '#1A1A1A',
-                        alabaster: '#FAF9F6',
-                        gold: '#C5A059',
-                        muted: '#8C8C8C',
-                    }
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Inter"', 'sans-serif'], },
+                    colors: { charcoal: '#1A1A1A', alabaster: '#FAF9F6', gold: '#C5A059', muted: '#8C8C8C', }
                 }
             }
         }
     </script>
     
     <style>
-        body { background-color: #1A1A1A; color: #FAF9F6; cursor: auto; overflow-x: hidden; }
+        body { background-color: #1A1A1A; color: #FAF9F6; cursor: none; overflow-x: hidden; }
         ::selection { background-color: #C5A059; color: white; }
-
-        /* Custom Cursor */
-        .cursor-dot, .cursor-outline {
-            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-            border-radius: 50%; z-index: 9999; pointer-events: none;
-        }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
         .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
         .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
         a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
-
-        /* Lenis */
         html.lenis, html.lenis body { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
-
-        /* Image Masks & Parallax */
         .img-mask { overflow: hidden; position: relative; }
         .parallax-img { width: 100%; height: 130%; object-fit: cover; position: absolute; top: -15%; }
-        
-        /* Typography Reveals */
-        .reveal-mask { overflow: hidden; display: inline-block; }
-        .reveal-text { display: inline-block; transform: translateY(110%); }
-    </style>
-    <style>
-        .marquee-container {
-            display: flex;
-            width: 200%;
-            animation: marquee 30s linear infinite;
+        .preserve-3d { transform-style: preserve-3d; }
+        .carousel-card {
+            position: absolute; left: 50%; top: 50%; transform-origin: center center;
+            width: 260px; height: 380px; margin-left: -130px; margin-top: -190px;
+            border-radius: 1rem; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+            backface-visibility: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .marquee-container:hover {
-            animation-play-state: paused;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .review-card {
-            width: 350px;
-            flex-shrink: 0;
+        @media (min-width: 768px) {
+            .carousel-card { width: 320px; height: 460px; margin-left: -160px; margin-top: -230px; }
         }
     </style>
 </head>
-<body class="cursor-auto bg-[#111111] text-alabaster antialiased selection:bg-gold selection:text-charcoal font-sans overflow-hidden">
-    <!-- PRELOADER -->
-    <div id="preloader" class="fixed inset-0 z-[200] bg-[#0a0a0a] flex flex-col items-center justify-center transition-transform duration-[1.2s] ease-[cubic-bezier(0.77,0,0.175,1)]">
-        <img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-16 md:h-20 mb-12 animate-pulse object-contain">
-        <button id="enter-btn" class="cursor-pointer border border-gold/50 text-gold px-12 py-4 tracking-[0.3em] uppercase text-xs hover:bg-gold hover:text-[#0a0a0a] transition-all duration-500 rounded-full">Enter</button>
+<body class="antialiased">
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+
+    <div id="preloader" class="fixed inset-0 z-50 bg-[#0a0a0a] flex flex-col items-center justify-center">
+        <div class="text-center">
+            <img src="assets/images/logo.png" alt="Logo" class="w-16 h-16 mx-auto mb-6 opacity-0" id="preload-logo">
+            <div class="h-[1px] w-0 bg-gold mx-auto" id="preload-line"></div>
+            <p class="mt-4 text-xs tracking-[0.3em] text-white/50 uppercase opacity-0" id="preload-text">Purifying</p>
+        </div>
     </div>
-
-    <!-- Custom Cursor -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
-
-    <!-- Header Navigation -->
-    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Home</a>
-                <a href="product.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
-                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Our Story</a>
-                <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Lab Report</a>
-                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Contact</a>
-                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
-            </div>
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-alabaster hover:text-gold">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
+    <header class="fixed top-0 w-full z-40 mix-blend-difference px-6 py-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 opacity-0 -translate-y-4 nav-item">
+                <img src="assets/images/logo.png" alt="Gaurya Farms" class="h-8 invert">
+            </a>
+            <nav class="hidden md:flex items-center space-x-12 text-xs tracking-[0.2em] font-medium uppercase text-alabaster">
+                <a href="index.html" class="hover:text-gold transition-colors opacity-0 -translate-y-4 nav-item">Home</a>
+                <a href="product.html" class="hover:text-gold transition-colors opacity-0 -translate-y-4 nav-item">Shop</a>
+                <a href="about-us.html" class="hover:text-gold transition-colors opacity-0 -translate-y-4 nav-item">Our Story</a>
+                <a href="lab-report.html" class="hover:text-gold transition-colors opacity-0 -translate-y-4 nav-item">Lab Report</a>
+                <a href="contact.html" class="hover:text-gold transition-colors opacity-0 -translate-y-4 nav-item">Contact</a>
+                <a href="product.html" class="border border-white/20 px-6 py-2 rounded-full hover:border-gold hover:text-gold transition-all opacity-0 -translate-y-4 nav-item">Cart (0)</a>
+            </nav>
         </div>
     </header>
 
-    <main>
-        <!-- HERO -->
-        <section class="h-screen flex items-center justify-center px-6 relative">
-                        <div class="absolute inset-0 z-0 img-mask opacity-40">
-                <img src="assets/images/cow-flowers.jpg" class="w-full h-full object-cover parallax-img" alt="Gaurya Farms A2 Ghee" data-speed="0.3">
-                <div class="absolute inset-0 bg-charcoal/80"></div>
-            </div>
-            
-            <div class="relative z-10 text-center">
-                <p class="text-gold tracking-[0.3em] uppercase text-xs mb-6 font-medium reveal-up">The Ancestral Process</p>
-                <h1 class="font-serif text-5xl md:text-7xl leading-tight mb-8">
-                    <span class="reveal-mask"><span class="reveal-text">Uncompromising</span></span><br>
-                    <span class="reveal-mask"><span class="reveal-text italic text-gold">Purity.</span></span>
-                </h1>
-                <div class="w-[1px] h-24 bg-gold mx-auto reveal-up origin-top"></div>
-            </div>
-        </section>
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
 
-        <!-- CHAPTER I: THE SOURCE -->
-        <section class="py-16 md:py-24 px-6 flex items-center">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 img-mask h-[40vh] md:h-[50vh] w-full reveal-img">
-                    <img src="assets/images/cow-tree.jpg" alt="Indigenous Gir Cow" class="parallax-img" data-speed="0.8">
-                </div>
-                                <div class="order-1 lg:order-2 space-y-6">
-                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 01</p>
-                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">The Source.</h2>
-                    <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
-                        It begins at the source. Pure A2 milk from indigenous, grass-fed Gir cows. No industrial shortcuts, no crowded feedlots   just a foundation of absolute, unyielding quality on our own farm.
+            <!-- HERO 3D CAROUSEL (Oli Studio Style) -->
+            <section class="relative min-h-[100vh] bg-gradient-to-b from-[#151515] to-[#0a0a0a] flex flex-col items-center justify-center overflow-hidden pt-20">
+                <div class="z-20 text-center mb-10 reveal-up">
+                    <img src="assets/images/logo.png" class="h-14 mx-auto mb-6 drop-shadow-xl" alt="Logo">
+                    <h1 class="font-serif text-5xl md:text-6xl text-alabaster mb-4 tracking-wide">Uncompromising Purity</h1>
+                    <p class="text-white/60 max-w-xl mx-auto text-sm font-light leading-relaxed mb-8 px-4">
+                        Bring your family's health to life with ancient Ayurvedic traditions. Experience flawless consistency, perfect aroma, and impeccable taste in every golden drop.
                     </p>
-                    <div class="pt-6 chapter-body">
-                        <button onclick="openGame()" class="group flex items-center space-x-4 text-sm tracking-[0.1em] uppercase text-alabaster hover:text-gold transition-colors">
-                            <span class="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/10 transition-all">
-                                <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                            <span>Play: The Gir Cow Journey</span>
-                        </button>
+                    <div class="flex space-x-4 justify-center">
+                        <a href="product.html" class="bg-white/10 hover:bg-gold text-white hover:text-[#111] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold transition-colors border border-white/10 shadow-lg backdrop-blur-sm">Acquire Now</a>
+                        <a href="about-us.html" class="border border-white/20 hover:border-gold text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold transition-colors">Our Story</a>
                     </div>
                 </div>
-        </section>
 
-        <!-- CHAPTER II: THE CULTURING -->
-        <section class="py-16 md:py-24 px-6 flex items-center bg-[#151515]">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-6">
-                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 02</p>
-                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">Time is an<br><span class="italic text-gold">Ingredient.</span></h2>
-                    <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
-                        We do not rush nature. The milk is slowly cultured into rich, earthen dahi overnight in traditional clay pots. Patience transforms the raw into the profound.
-                    </p>
-                </div>
-                <div class="img-mask h-[40vh] md:h-[50vh] w-full reveal-img">
-                    <img src="assets/images/cow-calf.jpg" alt="Farm details" class="parallax-img" data-speed="0.8">
-                </div>
-            </div>
-        </section>
-
-        <!-- CHAPTER III: THE CHURN -->
-        <section class="py-16 md:py-24 px-6 flex items-center">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 img-mask h-[40vh] md:h-[50vh] w-full reveal-img">
-                    <img src="assets/images/product-jar-wood.jpg" alt="A2 Bilona Ghee" class="parallax-img object-cover w-full h-full" data-speed="0.8">
-                </div>
-                                <div class="order-1 lg:order-2 space-y-6">
-                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 01</p>
-                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">The Source.</h2>
-                    <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
-                        It begins at the source. Pure A2 milk from indigenous, grass-fed Gir cows. No industrial shortcuts, no crowded feedlots   just a foundation of absolute, unyielding quality on our own farm.
-                    </p>
-                    <div class="pt-6 chapter-body">
-                        <button onclick="openGame()" class="group flex items-center space-x-4 text-sm tracking-[0.1em] uppercase text-alabaster hover:text-gold transition-colors">
-                            <span class="w-10 h-10 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/10 transition-all">
-                                <svg class="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            </span>
-                            <span>Play: The Gir Cow Journey</span>
-                        </button>
+                <div class="relative w-full max-w-[1400px] h-[400px] md:h-[500px] perspective-[1500px] flex items-center justify-center mt-4">
+                    <div id="carousel-spinner" class="relative w-full h-full preserve-3d">
+                        <div class="carousel-card"><img src="assets/images/cow-flowers.jpg" class="w-full h-full object-cover"></div>
+                        <div class="carousel-card"><img src="assets/images/cow-tree.jpg" class="w-full h-full object-cover"></div>
+                        <div class="carousel-card"><img src="assets/images/cow-calf.jpg" class="w-full h-full object-cover"></div>
+                        <div class="carousel-card"><img src="assets/images/farmer-selfie.jpg" class="w-full h-full object-cover"></div>
+                        <div class="carousel-card"><img src="assets/images/pouring-oil.jpg" class="w-full h-full object-cover"></div>
+                        <div class="carousel-card"><img src="assets/images/oil-bubbles.jpg" class="w-full h-full object-cover"></div>
                     </div>
                 </div>
-        </section>
-
-        <!-- CHAPTER IV: THE CLARIFICATION -->
-        <section class="py-16 md:py-24 px-6 flex items-center bg-[#151515]">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-6">
-                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 04</p>
-                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">Forged in<br><span class="italic text-gold">Warmth.</span></h2>
-                    <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
-                        Slow-simmered over a gentle, open flame. As the heat rises, the liquid clarifies, revealing a golden, nutrient-dense nectar with an unmistakable, roasted aroma.
-                    </p>
-                </div>
-                <div class="img-mask h-[40vh] md:h-[50vh] w-full reveal-img">
-                    <img src="assets/images/oil-bubbles.jpg" alt="Golden ghee" class="parallax-img" data-speed="0.8">
-                </div>
-            </div>
-        </section>
-
-        <!-- OUR PURITY PROMISE -->
-        <section class="py-16 md:py-20 px-6 bg-charcoal text-center">
-            <div class="max-w-7xl mx-auto">
-                <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-16 chapter-heading">Our Purity <span class="italic text-gold">Promise.</span></h2>
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-6 chapter-body">
-                    <div class="border border-white/10 bg-[#151515] p-8 flex flex-col items-center hover:border-gold transition-colors duration-300">
-                        <svg class="w-12 h-12 text-gold mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        <h3 class="text-sm font-medium tracking-wide">FSSAI Licensed</h3>
-                    </div>
-                    <div class="border border-white/10 bg-[#151515] p-8 flex flex-col items-center hover:border-gold transition-colors duration-300">
-                        <svg class="w-12 h-12 text-gold mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-                        <h3 class="text-sm font-medium tracking-wide">A2 Gir Cow Milk</h3>
-                    </div>
-                    <div class="border border-white/10 bg-[#151515] p-8 flex flex-col items-center hover:border-gold transition-colors duration-300">
-                        <svg class="w-12 h-12 text-gold mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                        <h3 class="text-sm font-medium tracking-wide">Traditional Bilona</h3>
-                    </div>
-                    <div class="border border-white/10 bg-[#151515] p-8 flex flex-col items-center hover:border-gold transition-colors duration-300">
-                        <svg class="w-12 h-12 text-gold mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                        <h3 class="text-sm font-medium tracking-wide">Lab Tested</h3>
-                    </div>
-                    <div class="border border-white/10 bg-[#151515] p-8 flex flex-col items-center hover:border-gold transition-colors duration-300">
-                        <svg class="w-12 h-12 text-gold mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <h3 class="text-sm font-medium tracking-wide">Preservative Free</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- HOW ITS MADE: BILONA METHOD -->
-        <section class="py-16 md:py-20 px-6 bg-[#111111] text-center text-alabaster overflow-hidden">
-            <div class="max-w-7xl mx-auto">
-                <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-20 chapter-heading">How It's Made: <span class="italic text-gold">The Bilona Method</span></h2>
                 
-                <div class="flex flex-col md:flex-row items-center justify-between relative max-w-6xl mx-auto chapter-body space-y-12 md:space-y-0">
-                    
-                    <!-- Step 1 -->
-                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
-                        <div class="h-32 flex items-center justify-center mb-6">
-                            <svg class="w-16 h-16 text-gold drop-shadow-[0_0_15px_rgba(197,160,89,0.4)] hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4a2 2 0 012-2h6a2 2 0 012 2v12m-9 0a2 2 0 00-2 2v2h12v-2a2 2 0 00-2-2m-9 0h9"/></svg>
-                        </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase text-alabaster">A2 Milk</h3>
+                <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none z-30"></div>
+            </section>
+            <!-- PHASE 01 -->
+            <section class="py-24 md:py-32 px-6 flex items-center bg-[#111]">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="order-2 lg:order-1 img-mask h-[40vh] md:h-[60vh] w-full reveal-img rounded-xl">
+                        <img src="assets/images/product-jar-wood.jpg" alt="A2 Bilona Ghee" class="parallax-img object-cover w-full h-full" data-speed="0.8">
                     </div>
-
-                    <!-- Arrow -->
-                    <div class="hidden md:block text-gold/30">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </div>
-                    
-                    <!-- Step 2 -->
-                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
-                        <div class="h-32 flex items-center justify-center mb-6">
-                            <svg class="w-16 h-16 text-gold drop-shadow-[0_0_15px_rgba(197,160,89,0.4)] hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12c0 4.418 3.582 8 8 8s8-3.582 8-8M4 12c0-2.209 3.582-4 8-4s8 1.791 8 4M4 12h16"/></svg>
-                        </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase text-alabaster">Curd</h3>
-                    </div>
-
-                    <!-- Arrow -->
-                    <div class="hidden md:block text-gold/30">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </div>
-                    
-                    <!-- Step 3 -->
-                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
-                        <div class="h-32 flex items-center justify-center mb-6 relative">
-                            <svg id="interactive-churner" class="w-16 h-16 text-gold drop-shadow-[0_0_15px_rgba(197,160,89,0.4)] hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18m-4-6h8m-6-4h4M8 17a4 4 0 008 0"/></svg>
-                        </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase text-gold">Churned</h3>
-                    </div>
-
-                    <!-- Arrow -->
-                    <div class="hidden md:block text-gold/30">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </div>
-                    
-                    <!-- Step 4 -->
-                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
-                        <div class="h-32 flex items-center justify-center mb-6">
-                            <svg class="w-16 h-16 text-gold drop-shadow-[0_0_15px_rgba(197,160,89,0.4)] hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7c-2 0-3 2-3 4 0 2.5 3 4 3 4s3-1.5 3-4c0-2-1-4-3-4zm0 14c-4.418 0-8-3.582-8-8 0-4.418 3.582-8 8-8s8 3.582 8 8c0 4.418-3.582 8-8 8z"/></svg>
-                        </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase text-alabaster">Slow Heat</h3>
-                    </div>
-
-                    <!-- Arrow -->
-                    <div class="hidden md:block text-gold/30">
-                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </div>
-                    
-                    <!-- Step 5 -->
-                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
-                        <div class="h-32 flex items-center justify-center mb-6">
-                            <svg class="w-16 h-16 text-gold drop-shadow-[0_0_15px_rgba(197,160,89,0.4)] hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="12" height="14" rx="2"/><path d="M8 8V6a2 2 0 012-2h4a2 2 0 012 2v2M6 12h12"/></svg>
-                        </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase text-alabaster">Pure A2 Ghee</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- COMPARISON SECTION -->
-        <section class="py-16 md:py-20 px-6 bg-[#151515]">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-16">
-                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold mb-4 chapter-step">Gaurya Farms vs Regular Ghee</p>
-                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">Why Choose<br><span class="italic text-gold">A2 Bilona Ghee?</span></h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative chapter-body">
-                    <!-- VS Badge -->
-                    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#1A1A1A] border border-gold rounded-full flex items-center justify-center z-10 hidden md:flex hover:rotate-180 transition-transform duration-700 cursor-pointer">
-                        <span class="text-gold font-serif italic font-bold">VS</span>
-                    </div>
-
-                    <!-- Left: Gaurya Farms (Green/Gold theme adapted to dark mode) -->
-                    <div class="bg-[#1c2419] p-10 md:p-14 group transition-colors duration-500 hover:bg-[#20291d]">
-                        <p class="text-gold tracking-widest text-xs uppercase font-bold mb-4">Our Promise</p>
-                        <h3 class="font-serif text-3xl mb-10 text-alabaster">Gaurya Farms Bilona Ghee<br><span class="text-sm font-sans font-light italic text-white/70 block mt-2">Pure, traditional & nothing artificial</span></h3>
+                    <div class="order-1 lg:order-2 space-y-8">
+                        <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 01</p>
+                        <h2 class="font-serif text-4xl md:text-6xl leading-tight chapter-heading">The Source.</h2>
+                        <p class="text-white/60 font-light leading-relaxed text-lg chapter-body">
+                            It begins at the source. Pure A2 milk from indigenous, grass-fed Gir cows. No industrial shortcuts, no crowded feedlots — just a foundation of absolute, unyielding quality on our own farm in Chittorgarh.
+                        </p>
                         
-                        <ul class="space-y-8">
-                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300">
-                                <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-alabaster">Made from A2 Gir Cow Milk</h4>
-                                    <p class="text-sm text-white/60 font-light mt-1">Ethically cared for indigenous Gir cows</p>
+                        <!-- DINO GAME EMBEDDED -->
+                        <div class="w-full border border-white/10 rounded-xl overflow-hidden relative bg-[#0a0a0a] shadow-2xl group mt-8 chapter-body">
+                            <div class="p-4 bg-charcoal border-b border-white/5 flex justify-between items-center">
+                                <h3 class="text-gold font-serif italic text-lg">The Gir Cow Journey</h3>
+                                <p class="text-[10px] text-white/40 tracking-widest uppercase hidden sm:block">Press Space / Tap to Jump</p>
+                            </div>
+                            <div class="relative w-full h-[200px] bg-gradient-to-b from-[#1a1a1a] to-[#111] overflow-hidden" id="dino-container">
+                                <canvas id="dino-canvas" class="w-full h-full block cursor-pointer"></canvas>
+                                <div id="dino-start-overlay" class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center backdrop-blur-sm cursor-pointer z-10 transition-opacity duration-300">
+                                    <span class="text-3xl mb-3">🐄</span>
+                                    <span class="text-white tracking-[0.2em] uppercase text-[10px] font-bold border border-gold/50 px-4 py-2 rounded-full hover:bg-gold hover:text-black hover:border-gold transition-colors pointer-events-none">Start Game</span>
                                 </div>
-                            </li>
-                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300 delay-75">
-                                <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-alabaster">Traditional Bilona Method</h4>
-                                    <p class="text-sm text-white/60 font-light mt-1">Milk to curd to butter to slow-cooked ghee</p>
+                                <div id="dino-game-over" class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center backdrop-blur-md opacity-0 pointer-events-none z-20 transition-opacity duration-300">
+                                    <h3 class="font-serif text-3xl text-gold mb-1">Game Over</h3>
+                                    <p class="text-white/70 tracking-widest uppercase text-[10px] mb-4">Score: <span id="dino-final-score">0</span></p>
+                                    <button id="dino-restart-btn" class="text-black tracking-[0.2em] uppercase text-[10px] font-bold bg-gold px-6 py-2 rounded-full hover:bg-white transition-colors pointer-events-auto">Try Again</button>
                                 </div>
-                            </li>
-                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300 delay-100">
-                                <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-alabaster">Slow Cooked on Low Flame</h4>
-                                    <p class="text-sm text-white/60 font-light mt-1">Slow cooked for rich aroma, texture and traditional taste</p>
+                                <div class="absolute top-3 right-3 text-white/50 text-[10px] font-mono tracking-widest pointer-events-none z-30">
+                                    HI <span id="dino-hi-score">00000</span> | <span id="dino-score" class="text-white">00000</span>
                                 </div>
-                            </li>
-                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300 delay-150">
-                                <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-alabaster">Handcrafted in Small Batches</h4>
-                                    <p class="text-sm text-white/60 font-light mt-1">Care in every step, not mass produced</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300 delay-200">
-                                <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-alabaster">No Preservatives or Additives</h4>
-                                    <p class="text-sm text-white/60 font-light mt-1">100% natural, nothing artificial</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Right: Regular Ghee -->
-                    <div class="bg-[#222222] p-10 md:p-14 opacity-80 hover:opacity-100 transition-opacity duration-500">
-                        <p class="text-muted tracking-widest text-xs uppercase font-bold mb-4">The Ordinary</p>
-                        <h3 class="font-serif text-3xl mb-10 text-white/60">Regular Ghee<br><span class="text-sm font-sans font-light italic text-white/40 block mt-2">Mass-made, mixed sources</span></h3>
-                        
-                        <ul class="space-y-8 grayscale">
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-red-900/50 mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-white/60">Mixed or Crossbred Cow Milk</h4>
-                                    <p class="text-sm text-white/40 font-light mt-1">Milk may come from mixed or unknown sources</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-red-900/50 mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-white/60">Cream Based Method</h4>
-                                    <p class="text-sm text-white/40 font-light mt-1">Made using cream separation method</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-red-900/50 mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-white/60">High Heat Industrial Processing</h4>
-                                    <p class="text-sm text-white/40 font-light mt-1">Processed at high temperatures</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-red-900/50 mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-white/60">Mass Produced</h4>
-                                    <p class="text-sm text-white/40 font-light mt-1">Large scale production, less attention to details</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 text-red-900/50 mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                <div>
-                                    <h4 class="font-bold text-white/60">May Contain Additives</h4>
-                                    <p class="text-sm text-white/40 font-light mt-1">Possible use of preservatives, flavors or synthetic additives</p>
-                                </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- CTA YIELD -->
-        <section class="min-h-screen flex items-center justify-center py-16 md:py-20 px-6 text-center relative overflow-hidden">
-                        <div class="absolute inset-0 z-0 img-mask opacity-40">
-                <img src="assets/images/cow-flowers.jpg" class="w-full h-full object-cover parallax-img" alt="Gaurya Farms A2 Ghee" data-speed="0.3">
-                <div class="absolute inset-0 bg-charcoal/80"></div>
-            </div>
-        </section>
+            <!-- PHASE 02 -->
+            <section class="py-24 md:py-32 px-6 flex items-center bg-[#0a0a0a]">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 02</p>
+                        <h2 class="font-serif text-4xl md:text-6xl leading-tight chapter-heading">Time is an<br><span class="italic text-gold">Ingredient.</span></h2>
+                        <p class="text-white/60 font-light leading-relaxed text-lg chapter-body">
+                            Unlike industrial ghee made directly from raw cream, we follow the authentic Ayurvedic tradition. The fresh milk is gently boiled over a wood-fire and inoculated with a natural starter culture, transforming it into probiotic-rich curd (Dahi) overnight.
+                        </p>
+                    </div>
+                    <div class="img-mask h-[40vh] md:h-[60vh] w-full reveal-img rounded-xl">
+                        <img src="assets/images/product-jar-marble.jpg" alt="Cultured Curd" class="parallax-img object-cover w-full h-full" data-speed="0.8">
+                    </div>
+                </div>
+            </section>
 
-                
+            <!-- PHASE 03 -->
+            <section class="py-24 md:py-32 px-6 flex items-center bg-[#111]">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="order-2 lg:order-1 img-mask h-[40vh] md:h-[60vh] w-full reveal-img rounded-xl">
+                        <img src="assets/images/cow-tree.jpg" alt="Bilona Churn" class="parallax-img object-cover w-full h-full" data-speed="0.8">
+                    </div>
+                    <div class="order-1 lg:order-2 space-y-8">
+                        <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 03</p>
+                        <h2 class="font-serif text-4xl md:text-6xl leading-tight chapter-heading">The Wooden<br><span class="italic text-gold">Bilona.</span></h2>
+                        <p class="text-white/60 font-light leading-relaxed text-lg chapter-body">
+                            During the ambrosial hours of Brahma Muhurta (before sunrise), the curd is hand-churned in both directions using a traditional wooden bilona. This bi-directional movement separates the rich, creamy Makhan (butter) while infusing the positive energy of the process.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PHASE 04 -->
+            <section class="py-24 md:py-32 px-6 flex items-center bg-[#0a0a0a]">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 04</p>
+                        <h2 class="font-serif text-4xl md:text-6xl leading-tight chapter-heading">Forged in<br><span class="italic text-gold">Warmth.</span></h2>
+                        <p class="text-white/60 font-light leading-relaxed text-lg chapter-body">
+                            Slow-simmered over a gentle, open cow-dung flame. As the heat rises, the liquid clarifies, revealing a golden, nutrient-dense nectar with an unmistakable, roasted aroma and crystalline texture.
+                        </p>
+                    </div>
+                    <div class="img-mask h-[40vh] md:h-[60vh] w-full reveal-img rounded-xl">
+                        <img src="assets/images/oil-bubbles.jpg" alt="Golden ghee" class="parallax-img object-cover w-full h-full" data-speed="0.8">
+                    </div>
+                </div>
+            </section>
+            <!-- OUR PURITY PROMISE -->
+            <section class="py-20 md:py-32 px-6 bg-[#151515] text-center border-y border-white/5">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-16 chapter-heading text-alabaster">Our Purity <span class="italic text-gold">Promise.</span></h2>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 chapter-body">
+                        <div class="border border-white/5 bg-[#1a1a1a] p-8 flex flex-col items-center hover:border-gold/50 rounded-xl transition-colors duration-500 shadow-xl">
+                            <span class="text-3xl mb-4">🔬</span>
+                            <h3 class="text-xs tracking-widest uppercase font-bold text-white/80">Lab Tested</h3>
+                        </div>
+                        <div class="border border-white/5 bg-[#1a1a1a] p-8 flex flex-col items-center hover:border-gold/50 rounded-xl transition-colors duration-500 shadow-xl">
+                            <span class="text-3xl mb-4">🐄</span>
+                            <h3 class="text-xs tracking-widest uppercase font-bold text-white/80">A2 Gir Cow</h3>
+                        </div>
+                        <div class="border border-white/5 bg-[#1a1a1a] p-8 flex flex-col items-center hover:border-gold/50 rounded-xl transition-colors duration-500 shadow-xl">
+                            <span class="text-3xl mb-4">🪵</span>
+                            <h3 class="text-xs tracking-widest uppercase font-bold text-white/80">Bilona Churned</h3>
+                        </div>
+                        <div class="border border-white/5 bg-[#1a1a1a] p-8 flex flex-col items-center hover:border-gold/50 rounded-xl transition-colors duration-500 shadow-xl">
+                            <span class="text-3xl mb-4">❌</span>
+                            <h3 class="text-xs tracking-widest uppercase font-bold text-white/80">No Preservatives</h3>
+                        </div>
+                        <div class="border border-white/5 bg-[#1a1a1a] p-8 flex flex-col items-center hover:border-gold/50 rounded-xl transition-colors duration-500 shadow-xl">
+                            <span class="text-3xl mb-4">🛡️</span>
+                            <h3 class="text-xs tracking-widest uppercase font-bold text-white/80">FSSAI Licensed</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <!-- REVIEWS MARQUEE -->
-    <section class="py-20 bg-[#0a0a0a] border-t border-white/5 overflow-hidden relative">
-        <div class="text-center mb-12">
-            <h2 class="font-serif text-3xl md:text-4xl text-alabaster">Loved by <span class="italic text-gold">Thousands</span></h2>
-            <p class="text-sm text-muted mt-2 font-light">Real reviews from families across India.</p>
-        </div>
-        
-        <div class="relative w-full">
-            <!-- Fade edges -->
-            <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10"></div>
-            <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10"></div>
-            
-            <div class="marquee-container space-x-6 px-6">
-                <!-- Group 1 -->
-                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
-                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"Finally found real A2 ghee that smells and tastes like what my grandmother used to make. The bilona method makes a huge difference."</p>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">R</div>
-                        <div><p class="text-sm font-medium">Rahul S.</p><p class="text-xs text-muted">Verified Buyer</p></div>
-                    </div>
-                </div>
-                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
-                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"My digestion has improved significantly since switching. You can literally feel the purity. The texture is grainy, just like authentic ghee should be."</p>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">P</div>
-                        <div><p class="text-sm font-medium">Priya M.</p><p class="text-xs text-muted">Verified Buyer</p></div>
-                    </div>
-                </div>
-                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
-                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"Premium packaging and incredible aroma. It adds so much flavor to my cooking. Highly recommend Gaurya Farms!"</p>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">A</div>
-                        <div><p class="text-sm font-medium">Amit D.</p><p class="text-xs text-muted">Verified Buyer</p></div>
+            <section class="py-24 bg-[#FAF9F6] border-t border-black/10 overflow-hidden relative">
+                <div class="text-center mb-16 flex flex-col items-center justify-center px-6 relative z-20">
+                    <h2 class="font-serif text-4xl md:text-5xl text-[#111] mb-6">Real feedback from <span class="italic text-gold">Real families.</span></h2>
+                    <div class="flex items-center space-x-3 bg-white px-6 py-4 rounded-full shadow-lg border border-gray-100 transform hover:scale-105 transition-transform">
+                        <span class="font-bold text-[#111] text-lg">Excellent</span>
+                        <div class="flex text-[#FBBC04]">
+                            <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
+                        </div>
+                        <span class="text-sm text-gray-500 border-l border-gray-200 pl-3">Based on 28 Reviews</span>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="w-6 h-6 ml-2" alt="Google">
                     </div>
                 </div>
                 
-                <!-- Group 2 (Duplicate for seamless loop) -->
-                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
-                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"Finally found real A2 ghee that smells and tastes like what my grandmother used to make. The bilona method makes a huge difference."</p>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">R</div>
-                        <div><p class="text-sm font-medium">Rahul S.</p><p class="text-xs text-muted">Verified Buyer</p></div>
+                <div class="relative w-full overflow-hidden flex">
+                    <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#FAF9F6] to-transparent z-10 pointer-events-none"></div>
+                    <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#FAF9F6] to-transparent z-10 pointer-events-none"></div>
+                    
+                    <div class="flex w-max" id="reviews-track">
+                        <div class="flex space-x-6 px-3">
+                            <div class="w-[350px] bg-white p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col justify-between shrink-0">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#008744] flex items-center justify-center text-white font-bold text-lg">P</div>
+                                            <div><p class="text-base font-bold text-gray-900">Priynka Tnwr</p><p class="text-xs text-gray-500">Jul 27, 2026</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-[#FBBC04] mb-4"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+                                    <p class="text-base text-gray-700 leading-relaxed font-medium">A2 Gheer cow ghee is Best quality and pure ghee 🤌🍯</p>
+                                </div>
+                            </div>
+                            <div class="w-[350px] bg-white p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col justify-between shrink-0">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#d62d20] flex items-center justify-center text-white font-bold text-lg">J</div>
+                                            <div><p class="text-base font-bold text-gray-900">Jagdish Vaishnav</p><p class="text-xs text-gray-500">Jul 27, 2026</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-[#FBBC04] mb-4"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+                                    <p class="text-base text-gray-700 leading-relaxed font-medium">A2 gheer cow ghee Maine purchase Kiya jiska test lajwab or quality supb hai Purchase karke bhahut hi...</p>
+                                </div>
+                            </div>
+                            <div class="w-[350px] bg-white p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col justify-between shrink-0">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#F4B400] flex items-center justify-center text-white font-bold text-lg">D</div>
+                                            <div><p class="text-base font-bold text-gray-900">Deepak Bairwa</p><p class="text-xs text-gray-500">Jul 27, 2026</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-[#FBBC04] mb-4"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+                                    <p class="text-base text-gray-700 leading-relaxed font-medium">A2 Gheer cow ghee is top quality and and sawad lajawaab hai Awesome 💯</p>
+                                </div>
+                            </div>
+                            <div class="w-[350px] bg-white p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col justify-between shrink-0">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#4285F4] flex items-center justify-center text-white font-bold text-lg">R</div>
+                                            <div><p class="text-base font-bold text-gray-900">Rahul S.</p><p class="text-xs text-gray-500">Aug 01, 2026</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-[#FBBC04] mb-4"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+                                    <p class="text-base text-gray-700 leading-relaxed font-medium">Finally found real A2 ghee that smells and tastes exactly like what my grandmother used to make. The bilona method makes a huge difference.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-6 px-3" aria-hidden="true">
+                            <div class="w-[350px] bg-white p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col justify-between shrink-0">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#008744] flex items-center justify-center text-white font-bold text-lg">P</div>
+                                            <div><p class="text-base font-bold text-gray-900">Priynka Tnwr</p><p class="text-xs text-gray-500">Jul 27, 2026</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-[#FBBC04] mb-4"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+                                    <p class="text-base text-gray-700 leading-relaxed font-medium">A2 Gheer cow ghee is Best quality and pure ghee 🤌🍯</p>
+                                </div>
+                            </div>
+                            <div class="w-[350px] bg-white p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col justify-between shrink-0">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#d62d20] flex items-center justify-center text-white font-bold text-lg">J</div>
+                                            <div><p class="text-base font-bold text-gray-900">Jagdish Vaishnav</p><p class="text-xs text-gray-500">Jul 27, 2026</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-[#FBBC04] mb-4"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+                                    <p class="text-base text-gray-700 leading-relaxed font-medium">A2 gheer cow ghee Maine purchase Kiya jiska test lajwab or quality supb hai Purchase karke bhahut hi...</p>
+                                </div>
+                            </div>
+                            <div class="w-[350px] bg-white p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col justify-between shrink-0">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#F4B400] flex items-center justify-center text-white font-bold text-lg">D</div>
+                                            <div><p class="text-base font-bold text-gray-900">Deepak Bairwa</p><p class="text-xs text-gray-500">Jul 27, 2026</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-[#FBBC04] mb-4"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+                                    <p class="text-base text-gray-700 leading-relaxed font-medium">A2 Gheer cow ghee is top quality and and sawad lajawaab hai Awesome 💯</p>
+                                </div>
+                            </div>
+                            <div class="w-[350px] bg-white p-8 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-gray-100 flex flex-col justify-between shrink-0">
+                                <div>
+                                    <div class="flex justify-between items-start mb-6">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-12 h-12 rounded-full bg-[#4285F4] flex items-center justify-center text-white font-bold text-lg">R</div>
+                                            <div><p class="text-base font-bold text-gray-900">Rahul S.</p><p class="text-xs text-gray-500">Aug 01, 2026</p></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex text-[#FBBC04] mb-4"><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span></div>
+                                    <p class="text-base text-gray-700 leading-relaxed font-medium">Finally found real A2 ghee that smells and tastes exactly like what my grandmother used to make. The bilona method makes a huge difference.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="review-card bg-[#151515] p-8 rounded-xl border border-white/5">
-                    <div class="flex text-gold mb-4"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-                    <p class="text-sm font-light text-white/80 leading-relaxed mb-6">"My digestion has improved significantly since switching. You can literally feel the purity. The texture is grainy, just like authentic ghee should be."</p>
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold">P</div>
-                        <div><p class="text-sm font-medium">Priya M.</p><p class="text-xs text-muted">Verified Buyer</p></div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="bg-[#111] pt-24 pb-12 border-t border-white/10 px-6 text-center">
+                <div class="max-w-4xl mx-auto">
+                    <img src="assets/images/logo.png" class="w-16 mx-auto mb-8 opacity-50 hover:opacity-100 transition-opacity" alt="Logo">
+                    <div class="flex justify-center space-x-8 mb-12 text-xs tracking-[0.2em] uppercase text-white/50">
+                        <a href="product.html" class="hover:text-gold transition-colors">Shop</a>
+                        <a href="about-us.html" class="hover:text-gold transition-colors">Story</a>
+                        <a href="lab-report.html" class="hover:text-gold transition-colors">Lab Report</a>
+                        <a href="contact.html" class="hover:text-gold transition-colors">Contact</a>
                     </div>
+                    <p class="text-white/30 text-xs">© 2026 Gaurya Farms. All rights reserved.</p>
                 </div>
-            </div>
+            </footer>
         </div>
-    </section>
-
-<!-- FOOTER -->
-        <footer class="cursor-auto bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <!-- Brand -->
-                <div class="md:col-span-1">
-                    <img src="./assets/images/logo.png" alt="Gaurya Farms" class="h-12 md:h-16 object-contain mb-6">
-                    <p class="text-sm text-muted leading-relaxed font-light mb-6">
-                        Ancestral preservation in a jar.<br>
-                        100% pure A2 Gir cow bilona ghee, made ethically on our own farm.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/gauryafarms/" target="_blank" class="text-muted hover:text-gold transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        </a>
-                        <a href="#" class="text-muted hover:text-gold transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Shop -->
-                <div>
-                    <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Shop</h4>
-                    <ul class="space-y-4 text-sm font-light text-muted">
-                        <li><a href="product.html" class="hover:text-gold transition-colors">All Products</a></li>
-                        <li><a href="product.html" class="hover:text-gold transition-colors">A2 Bilona Ghee</a></li>
-                        <li><a href="https://gauryafarms.com/cart" class="hover:text-gold transition-colors">View Cart</a></li>
-                    </ul>
-                </div>
-
-                <!-- Support -->
-                <div>
-                    <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Support</h4>
-                    <ul class="space-y-4 text-sm font-light text-muted">
-                        <li><a href="contact.html" class="hover:text-gold transition-colors">Contact Us</a></li>
-                        <li><a href="lab-report.html" class="hover:text-gold transition-colors">Lab Report</a></li>
-                        <li><a href="https://gauryafarms.com/policies/shipping-policy" class="hover:text-gold transition-colors">Shipping Policy</a></li>
-                        <li><a href="https://gauryafarms.com/policies/refund-policy" class="hover:text-gold transition-colors">Refund Policy</a></li>
-                        <li><a href="https://gauryafarms.com/policies/terms-of-service" class="hover:text-gold transition-colors">Terms of Service</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact -->
-                <div>
-                    <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Contact</h4>
-                    <ul class="space-y-4 text-sm font-light text-muted">
-                        <li>
-                            <span class="block text-alabaster mb-1">Farm Address</span>
-                            Jalday Vibhag Ke Store Pass,<br>Tejaji Ka Chouk Road, Pratap Nagar,<br>Chittorgarh, Rajasthan 312001
-                        </li>
-                        <li class="pt-2">
-                            <span class="block text-alabaster mb-1">Phone</span>
-                            <a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="max-w-7xl mx-auto border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-muted">
-                <p>&copy; 2024 Gaurya Farms. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="https://gauryafarms.com/policies/privacy-policy" class="hover:text-gold transition-colors">Privacy Policy</a>
-                    <a href="https://gauryafarms.com/policies/terms-of-service" class="hover:text-gold transition-colors">Terms of Service</a>
-                </div>
-            </div>
-        </footer>
     </main>
-
-    <!-- REWARD MODAL (Gamification) -->
-    <div id="reward-modal" class="fixed inset-0 z-[100] bg-[#111111]/90 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-1000">
-        <div class="bg-[#1A1A1A] border border-gold p-12 max-w-lg text-center shadow-[0_0_50px_rgba(197,160,89,0.2)] rounded-sm transform scale-95 transition-transform duration-1000" id="reward-box">
-            <svg class="w-16 h-16 text-gold mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.5c-3.59 0-6.5-2.91-6.5-6.5 0-3.35 4.39-9.92 5.92-12.08.28-.39.87-.39 1.15 0 1.53 2.16 5.93 8.73 5.93 12.08 0 3.59-2.91 6.5-6.5 6.5z"/></svg>
-            <h2 class="font-serif text-3xl mb-4 text-gold italic">The Artisan's Secret</h2>
-            <p class="text-muted font-light mb-8">You have found all 3 Golden Drops hidden across our farm. As a reward for your curiosity, enjoy 10% off your first batch.</p>
-            <div class="border border-gold/30 bg-[#151515] py-4 px-8 inline-block mb-8">
-                <span class="text-2xl font-mono text-alabaster tracking-widest select-all">ANCESTRAL10</span>
-            </div>
-            <br>
-            <button onclick="closeReward()" class="text-xs tracking-widest uppercase text-muted hover:text-gold transition-colors">Close</button>
-        </div>
-    </div>
-
-<style>
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
-        .lenis.lenis-stopped { overflow: hidden; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .reveal-up { opacity: 0; transform: translateY(30px); }
-        .reveal-img { opacity: 0; clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transition: clip-path 1.2s cubic-bezier(0.5, 0, 0, 1), opacity 1.2s; }
-        .reveal-img.is-revealed { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-        .drop-gamification.found { display: none !important; }
-    </style>
-
     <script>
-        // Custom Cursor
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorOutline = document.getElementById('cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
-            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        // --- PRELOADER ---
+        const preloader = document.getElementById('preloader');
+        const preloadLogo = document.getElementById('preload-logo');
+        const preloadLine = document.getElementById('preload-line');
+        const preloadText = document.getElementById('preload-text');
+
+        window.addEventListener('load', () => {
+            const tl = gsap.timeline();
+            tl.to(preloadLogo, { opacity: 1, duration: 0.4, ease: "power2.out" })
+              .to(preloadLine, { width: "100px", duration: 0.4, ease: "power2.out" }, "-=0.2")
+              .to(preloadText, { opacity: 1, duration: 0.3 })
+              .to(preloader, { yPercent: -100, duration: 0.6, ease: "power4.inOut", delay: 0.3 })
+              .fromTo(".nav-item", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.05 }, "-=0.2")
+              .fromTo(".reveal-up", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }, "-=0.2");
+        });
+
+        // --- 3D CAROUSEL SETUP ---
+        const spinner = document.getElementById('carousel-spinner');
+        const cards = document.querySelectorAll('.carousel-card');
+        const totalCards = cards.length;
+        const angle = 360 / totalCards;
+        const translateZ = window.innerWidth < 768 ? 200 : 350; // Responsive Z distance
+        
+        cards.forEach((card, index) => {
+            const currentAngle = angle * index;
+            card.style.transform = `rotateY(${currentAngle}deg) translateZ(${translateZ}px)`;
         });
         
-        // Lenis Smooth Scroll
-        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        let currentRotation = 0;
+        function autoRotateCarousel() {
+            currentRotation -= 0.2; // Speed of auto-rotation
+            spinner.style.transform = `rotateY(${currentRotation}deg)`;
+            requestAnimationFrame(autoRotateCarousel);
+        }
+        autoRotateCarousel();
+
+        // Sync Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
         function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
-        
-        // Gamified Scroll Interaction: The Bilona Churner
-        if(document.getElementById('interactive-churner')) {
-            gsap.to("#interactive-churner", {
-                rotation: 720,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#interactive-churner",
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 1
-                }
-            });
-        }
 
-        // Other GSAP Animations
+        // GSAP ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
-        const enterBtn = document.getElementById('enter-btn');
-        if(enterBtn) {
-            enterBtn.addEventListener('click', () => {
-                document.getElementById('preloader').style.transform = 'translateY(-100%)';
-                document.body.classList.remove('overflow-hidden');
-            });
-        }
 
-        // Hero Scroll Animation (Jar filling up)
-        const heroTl = gsap.timeline({
-            scrollTrigger: {
-                trigger: "#hero-sequence",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 1
-            }
-        });
-
-        heroTl.to("#hero-text", { opacity: 0, y: -50, duration: 1 })
-              .to("#hero-overlay", { backgroundColor: "rgba(0,0,0,0.8)", duration: 1 }, "<")
-              .to("#hero-bg-img", { scale: 1.1, duration: 3 }, "<")
-              .to("#hero-jar-container", { opacity: 1, scale: 1, duration: 0.5 }, "-=2.5")
-              .to("#hero-liquid", { height: "100%", duration: 1.5 }, "-=2")
-              .to("#jar-text", { opacity: 0, duration: 0.5 }, "-=0.5")
-              .to("#hero-jar-container", { opacity: 0, scale: 1.2, duration: 0.5 });
-        
-        // Sync Lenis with GSAP
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => { lenis.raf(time * 1000) });
-        gsap.ticker.lagSmoothing(0);
-
-        // Hero Animation
-        const heroTl = gsap.timeline();
-        heroTl.to('.reveal-text', { y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.2, delay: 0.5 })
-              .to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.2 }, "-=0.8");
+        // Marquee
+        gsap.to("#reviews-track", { xPercent: -50, ease: "none", duration: 30, repeat: -1 });
 
         // Scroll Animations for Chapters
-        const sections = document.querySelectorAll('section');
-        
-        sections.forEach(section => {
-            const heading = section.querySelector('.chapter-heading');
-            const step = section.querySelector('.chapter-step');
-            const body = section.querySelectorAll('.chapter-body');
-            const imgContainer = section.querySelector('.reveal-img');
-            const parallaxImg = section.querySelector('.parallax-img');
+        const chapters = document.querySelectorAll('section');
+        chapters.forEach(chapter => {
+            const heading = chapter.querySelector('.chapter-heading');
+            const step = chapter.querySelector('.chapter-step');
+            const body = chapter.querySelectorAll('.chapter-body');
+            const img = chapter.querySelector('.reveal-img img');
+            const mask = chapter.querySelector('.img-mask');
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 75%",
-                }
-            });
-
-            if (imgContainer) {
-                ScrollTrigger.create({
-                    trigger: section,
-                    start: "top 75%",
-                    onEnter: () => imgContainer.classList.add('is-revealed')
+            if(heading || step || body.length > 0 || mask) {
+                const tl = gsap.timeline({
+                    scrollTrigger: { trigger: chapter, start: "top 75%", toggleActions: "play none none reverse" }
                 });
+
+                if(step) tl.fromTo(step, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" });
+                if(heading) tl.fromTo(heading, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.4");
+                if(body.length > 0) tl.fromTo(body, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.6");
+                if(mask) tl.fromTo(mask, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", duration: 1, ease: "power3.inOut" }, "-=0.8");
             }
 
-            if (step) tl.fromTo(step, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0);
-            if (heading) tl.fromTo(heading, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 0.2);
-            if (body.length > 0) tl.fromTo(body, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }, 0.4);
-
-            // Image Parallax Effect
-            if (parallaxImg) {
-                gsap.to(parallaxImg, {
-                    yPercent: 15,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: true
-                    }
+            if(img) {
+                gsap.to(img, {
+                    yPercent: 15, ease: "none",
+                    scrollTrigger: { trigger: chapter, start: "top bottom", end: "bottom top", scrub: true }
                 });
             }
         });
-    </script>
-<script src="assets/js/minigames.js"></script>
-        <!-- FLAPPY COW GAME MODAL -->
-        <div id="gameModal" class="fixed inset-0 z-[100] bg-charcoal/95 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-500">
-            <button onclick="closeGame()" class="absolute top-8 right-8 text-white hover:text-gold transition-colors">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <div class="text-center mb-6">
-                <h2 class="font-serif text-4xl text-alabaster mb-2">Flappy <span class="text-gold italic">Cow</span></h2>
-                <p class="text-sm text-muted font-light">Press Spacebar or Click/Tap the game area to jump the fences!</p>
-            </div>
-            <div class="relative w-full max-w-[800px] h-[500px] border border-gold/30 rounded-lg overflow-hidden bg-[#1A1A1A] shadow-[0_0_50px_rgba(197,160,89,0.15)]">
-                <canvas id="flappyCanvas" width="800" height="500" class="w-full h-full cursor-pointer block"></canvas>
-                <div id="flappyOverlay" class="absolute inset-0 bg-black/80 flex items-center justify-center flex-col z-10 cursor-pointer transition-opacity duration-300">
-                    <span class="text-gold text-4xl font-serif italic mb-4" id="flappyTitle">Click to Start</span>
-                    <span class="text-white/70 text-xl font-light" id="flappyScoreText">High Score: 0</span>
-                </div>
-            </div>
-        </div>
-    <script>
-        // Flappy Cow Logic
-        let flappyLoopId;
-        function openGame() {
-            const modal = document.getElementById('gameModal');
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.remove('opacity-0'), 50);
-            document.body.style.overflow = 'hidden';
-            initFlappyCow();
-        }
-        
-        function closeGame() {
-            const modal = document.getElementById('gameModal');
-            modal.classList.add('opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-                cancelAnimationFrame(flappyLoopId);
-            }, 500);
-        }
 
-        function initFlappyCow() {
-            const canvas = document.getElementById('flappyCanvas');
-            if (!canvas) return;
+        // --- DINO GAME LOGIC ---
+        const canvas = document.getElementById('dino-canvas');
+        if(canvas) {
             const ctx = canvas.getContext('2d');
-            const overlay = document.getElementById('flappyOverlay');
-            const title = document.getElementById('flappyTitle');
-            const scoreText = document.getElementById('flappyScoreText');
+            let animationId;
+            let frames = 0, score = 0;
+            let hiScore = localStorage.getItem('girCowHiScore') || 0;
+            let gameSpeed = 5, gameOver = false, gameStarted = false;
 
-            let frames = 0, score = 0, best = 0;
-            let state = { current: 0, getReady: 0, game: 1, over: 2 };
-            
+            document.getElementById('dino-hi-score').innerText = hiScore.toString().padStart(5, '0');
+
             const cow = {
-                x: 80, y: 200, w: 40, h: 28,
-                gravity: 0.3, jump: 6, speed: 0,
+                x: 50, y: 180, width: 40, height: 30, dy: 0, jumpForce: 12, originalY: 180,
+                grounded: false, jumpTimer: 0,
                 draw: function() {
-                    ctx.fillStyle = '#c5a059'; ctx.fillRect(this.x, this.y, this.w, this.h);
-                    ctx.fillStyle = '#fff'; ctx.fillRect(this.x+28, this.y+4, 6, 6);
-                    ctx.fillStyle = '#111'; ctx.fillRect(this.x+30, this.y+6, 2, 2);
+                    ctx.font = "30px Arial"; ctx.fillText("🐄", this.x, this.y + this.height);
                 },
-                flap: function() { this.speed = -this.jump; },
-                update: function() {
-                    this.speed += this.gravity; this.y += this.speed;
-                    if (this.y + this.h >= canvas.height || this.y < 0) state.current = state.over;
-                },
-                reset: function() { this.y = 200; this.speed = 0; }
-            };
-
-            const pipes = {
-                position: [], w: 50, gap: 130, dx: 3,
-                draw: function() {
-                    for(let i=0; i < this.position.length; i++) {
-                        let p = this.position[i];
-                        let bottomY = p.y + this.gap;
-                        ctx.fillStyle = '#8C8C8C';
-                        ctx.fillRect(p.x, 0, this.w, p.y);
-                        ctx.fillRect(p.x, bottomY, this.w, canvas.height - bottomY);
+                jump: function() {
+                    if (this.grounded && this.jumpTimer == 0) {
+                        this.jumpTimer = 1; this.dy = -this.jumpForce;
+                    } else if (this.jumpTimer > 0 && this.jumpTimer < 15) {
+                        this.jumpTimer++; this.dy = -this.jumpForce - (this.jumpTimer / 50);
                     }
                 },
                 update: function() {
-                    if(frames % 100 == 0) {
-                        this.position.push({ x: canvas.width, y: Math.max(50, Math.random() * (canvas.height - this.gap - 50)) });
-                    }
-                    for(let i=0; i < this.position.length; i++) {
-                        let p = this.position[i];
-                        p.x -= this.dx;
-                        if (cow.x + cow.w > p.x && cow.x < p.x + this.w && (cow.y < p.y || cow.y + cow.h > p.y + this.gap)) {
-                            state.current = state.over;
-                        }
-                        if(p.x + this.w < 0) {
-                            this.position.shift(); score++; best = Math.max(score, best);
-                        }
-                    }
-                },
-                reset: function() { this.position = []; }
+                    if (this.y < this.originalY) { this.dy += 0.6; this.grounded = false; } 
+                    else { this.dy = 0; this.grounded = true; this.y = this.originalY; }
+                    this.y += this.dy; this.draw();
+                }
             };
 
-            function draw() {
-                ctx.fillStyle = '#1A1A1A'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-                pipes.draw(); cow.draw();
-                ctx.fillStyle = '#fff'; ctx.font = '28px serif'; ctx.fillText(score, 20, 40);
+            const obstacles = [];
+            class Obstacle {
+                constructor() {
+                    this.width = 15 + Math.random() * 15;
+                    this.height = 30 + Math.random() * 20;
+                    this.x = canvas.width;
+                    this.y = cow.originalY + cow.height - this.height;
+                }
+                draw() {
+                    ctx.fillStyle = '#E5B962'; ctx.fillRect(this.x, this.y, this.width, this.height);
+                    ctx.fillStyle = '#C5A059'; ctx.fillRect(this.x + 4, this.y + 4, this.width - 8, this.height - 8);
+                }
+                update() { this.x -= gameSpeed; this.draw(); }
             }
-            
-            function update() {
-                if(state.current === state.game) { cow.update(); pipes.update(); } 
-                else if (state.current === state.over) {
-                    overlay.style.opacity = '1'; overlay.style.pointerEvents = 'auto';
-                    title.innerText = "Game Over"; scoreText.innerText = "Score: " + score + " | High: " + best;
+
+            function handleObstacles() {
+                if (frames % 100 === 0) obstacles.push(new Obstacle());
+                for (let i = 0; i < obstacles.length; i++) {
+                    obstacles[i].update();
+                    if (cow.x < obstacles[i].x + obstacles[i].width && cow.x + cow.width > obstacles[i].x &&
+                        cow.y < obstacles[i].y + obstacles[i].height && cow.y + cow.height > obstacles[i].y) {
+                        gameOver = true;
+                    }
+                    if (obstacles[i].x + obstacles[i].width < 0) { obstacles.splice(i, 1); i--; }
                 }
             }
-            
-            function loop() { draw(); update(); frames++; flappyLoopId = requestAnimationFrame(loop); }
-            
-            function doJump(e) {
-                if (e) { e.preventDefault(); e.stopPropagation(); }
-                if(state.current === state.getReady || state.current === state.over) {
-                    state.current = state.game; cow.reset(); pipes.reset(); score = 0;
-                    overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
-                }
-                cow.flap();
+
+            function drawBackground() {
+                ctx.fillStyle = '#C5A059'; ctx.fillRect(0, cow.originalY + cow.height, canvas.width, 2);
             }
-            
-            canvas.onmousedown = doJump;
-            window.onkeydown = (e) => { if(e.code === 'Space' && state.current !== state.getReady && modal.classList.contains('hidden')===false) doJump(); };
-            overlay.onmousedown = doJump;
-            
-            cancelAnimationFrame(flappyLoopId);
-            loop();
+
+            function animate() {
+                animationId = requestAnimationFrame(animate);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawBackground(); cow.update(); handleObstacles();
+                
+                if (frames % 10 === 0) {
+                    score++;
+                    document.getElementById('dino-score').innerText = score.toString().padStart(5, '0');
+                }
+                if (score > 0 && score % 400 === 0) gameSpeed += 0.5;
+                frames++;
+
+                if (gameOver) {
+                    cancelAnimationFrame(animationId);
+                    document.getElementById('dino-game-over').style.opacity = '1';
+                    document.getElementById('dino-game-over').style.pointerEvents = 'auto';
+                    document.getElementById('dino-final-score').innerText = score;
+                    if (score > hiScore) {
+                        hiScore = score; localStorage.setItem('girCowHiScore', hiScore);
+                        document.getElementById('dino-hi-score').innerText = hiScore.toString().padStart(5, '0');
+                    }
+                }
+            }
+
+            function resetGame() {
+                cow.y = cow.originalY; cow.dy = 0; obstacles.length = 0; score = 0; frames = 0; gameSpeed = 5; gameOver = false;
+                document.getElementById('dino-game-over').style.opacity = '0';
+                document.getElementById('dino-game-over').style.pointerEvents = 'none';
+                document.getElementById('dino-score').innerText = '00000';
+                animate();
+            }
+
+            function handleInput(e) {
+                if(e.type === 'keydown' && e.code !== 'Space') return;
+                if(e.type === 'keydown') e.preventDefault();
+                
+                if (!gameStarted) {
+                    gameStarted = true;
+                    document.getElementById('dino-start-overlay').style.opacity = '0';
+                    document.getElementById('dino-start-overlay').style.pointerEvents = 'none';
+                    animate();
+                }
+                if (!gameOver) { cow.jump(); }
+            }
+
+            window.addEventListener('keydown', handleInput);
+            window.addEventListener('keyup', (e) => { if (e.code === 'Space') cow.jumpTimer = 0; });
+            canvas.addEventListener('mousedown', handleInput);
+            canvas.addEventListener('touchstart', handleInput, {passive: false});
+            canvas.addEventListener('mouseup', () => { cow.jumpTimer = 0; });
+            canvas.addEventListener('touchend', () => { cow.jumpTimer = 0; });
+            document.getElementById('dino-start-overlay').addEventListener('click', handleInput);
+            document.getElementById('dino-restart-btn').addEventListener('click', resetGame);
+
+            function resizeCanvas() {
+                const container = document.getElementById('dino-container');
+                canvas.width = container.clientWidth; canvas.height = container.clientHeight;
+                cow.originalY = canvas.height - 60; cow.y = cow.originalY;
+            }
+            window.addEventListener('resize', resizeCanvas); resizeCanvas();
+            drawBackground(); cow.draw();
         }
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = e.clientX + 'px'; cursorDot.style.top = e.clientY + 'px';
+            cursorOutline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 150, fill: "forwards" });
+        });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
