@@ -53,7 +53,13 @@
         .text-themed-muted { color: var(--text-muted); }
         .text-themed-faint { color: var(--text-faint); }
 
- </style>
+         /* Lenis CSS */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+    </style>
 </head>
 <body class="antialiased">
  <div class="cursor-dot"></div><div class="cursor-outline"></div>
@@ -87,7 +93,7 @@
  <header class="fixed top-0 w-full z-40 px-6 py-8 bg-gradient-to-b from-white/80 to-transparent backdrop-blur-sm">
  <div class="max-w-7xl mx-auto flex justify-between items-center">
  <a href="index.html" class="flex items-center space-x-2 opacity-0 -translate-y-4 nav-item">
- <img src="assets/images/Gaurya Farms Logo (New).svg" alt="Gaurya Farms" class="h-8">
+ <img src="assets/images/Gaurya Farms Logo (New).svg" alt="Gaurya Farms" class="h-12 md:h-16">
  </a>
  <nav class="hidden md:flex items-center space-x-12 text-xs tracking-[0.2em] font-medium uppercase text-themed">
  <a href="index.html" class="hover:text-gold transition-colors opacity-0 -translate-y-4 nav-item">Home</a>
@@ -100,37 +106,38 @@
  </div>
  </header>
 
- <main id="smooth-wrapper">
- <div id="smooth-content">
-
- <!-- HERO 3D CAROUSEL (Oli Studio Style) -->
- <section class="relative min-h-[100vh] bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-tertiary)] flex flex-col items-center justify-center overflow-hidden pt-20">
- <div class="z-20 text-center mb-10 reveal-up">
- <img src="assets/images/Gaurya Farms Logo (New).svg" class="h-14 mx-auto mb-6 drop-shadow-xl" alt="Logo">
- <h1 class="font-serif text-5xl md:text-6xl text-themed mb-4 tracking-wide">Uncompromising Purity</h1>
- <p class="text-themed-muted max-w-xl mx-auto text-sm font-light leading-relaxed mb-8 px-4">
- From our farm in Chittorgarh to your kitchen — experience the pure, golden essence of tradition. Handcrafted A2 Gir Cow Bilona Ghee, made the way it has been for centuries.
- </p>
- <div class="flex space-x-4 justify-center">
- <a href="product.html" class="bg-white/10 hover:bg-gold text-themed hover:text-[#111] px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold transition-colors border border-white/10 shadow-lg backdrop-blur-sm">Acquire Now</a>
- <a href="about-us.html" class="border border-white/20 hover:border-gold text-themed px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold transition-colors">Our Story</a>
- </div>
- </div>
-
- <div class="relative w-full max-w-[1400px] h-[400px] md:h-[500px] perspective-[1500px] flex items-center justify-center mt-4">
- <div id="carousel-spinner" class="relative w-full h-full preserve-3d">
- <div class="carousel-card"><img src="assets/images/cow-flowers.jpg" class="w-full h-full object-cover"></div>
- <div class="carousel-card"><img src="assets/images/cow-tree.jpg" class="w-full h-full object-cover"></div>
- <div class="carousel-card"><img src="assets/images/cow-calf.jpg" class="w-full h-full object-cover"></div>
- <div class="carousel-card"><img src="assets/images/farmer-selfie.jpg" class="w-full h-full object-cover"></div>
- <div class="carousel-card"><img src="assets/images/pouring-oil.jpg" class="w-full h-full object-cover"></div>
- <div class="carousel-card"><img src="assets/images/oil-bubbles.jpg" class="w-full h-full object-cover"></div>
- </div>
- </div>
+ <main>
  
- <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[var(--bg-tertiary)] to-transparent pointer-events-none z-30"></div>
- </section>
- <!-- PHASE 01 --><section class="py-24 md:py-32 px-6 flex items-center ">
+
+  <!-- HERO 3D CAROUSEL -->
+ <section class="relative min-h-[100vh] bg-gradient-to-b from-[var(--bg-subtle)] to-[var(--bg-tertiary)] flex flex-col items-center justify-center overflow-hidden pt-32 pb-20">
+ <div class="z-20 text-center mb-10 reveal-up">
+ <h1 class="font-serif text-5xl md:text-7xl text-themed mb-4 tracking-wide leading-tight">Pure Ghee,<br><span class="italic text-gold">Pure Legacy.</span></h1>
+ <p class="text-themed-muted max-w-xl mx-auto text-base font-light leading-relaxed mb-8 px-4">
+ Experience the rich, golden essence of authentic A2 Gir Cow Bilona Ghee. Crafted with patience and devotion for your family.
+ </p>
+ <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
+ <a href="product.html" class="bg-[#1A1A1A] hover:bg-gold text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold transition-colors shadow-lg">Acquire Now</a>
+ <a href="about-us.html" class="border border-[var(--border-color)] hover:border-gold text-themed px-8 py-3 rounded-full text-xs uppercase tracking-widest font-bold transition-colors">Our Story</a>
+ </div>
+ </div>
+
+  <div class="relative w-full max-w-5xl mx-auto h-[400px] md:h-[600px] mt-12 rounded-[2rem] overflow-hidden shadow-2xl border border-[var(--border-color)]">
+ <div class="hero-fader absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-100">
+ <img src="assets/images/pouring-oil.jpg" class="w-full h-full object-cover">
+ </div>
+ <div class="hero-fader absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-0">
+ <img src="assets/images/product-jar-wood.jpg" class="w-full h-full object-cover">
+ </div>
+ <div class="hero-fader absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-0">
+ <img src="assets/images/cow-calf.jpg" class="w-full h-full object-cover">
+ </div>
+ <div class="hero-fader absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-0">
+ <img src="assets/images/Artboard 4.png" class="w-full h-full object-cover">
+ </div>
+ </div>
+ </div>
+ </section><!-- PHASE 01 --><section class="py-24 md:py-32 px-6 flex items-center ">
  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
  <div class="order-2 lg:order-1 img-mask h-[40vh] md:h-[60vh] w-full reveal-img rounded-xl">
  <img src="assets/images/product-jar-wood.jpg" alt="A2 Bilona Ghee" class="parallax-img object-cover w-full h-full" data-speed="0.8">
@@ -461,9 +468,7 @@
                     </div>
                     <p class="text-themed-faint text-xs">© 2026 Gaurya Farms. All rights reserved.</p>
                 </div>
-            </footer>
- </div>
- </main>
+            </footer></main>
  <script>
  // --- PRELOADER ---
  const preloader = document.getElementById('preloader');
@@ -481,33 +486,32 @@
               .fromTo(".reveal-up", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }, "-=0.2");
         });
 
- // --- 3D CAROUSEL SETUP ---
- const spinner = document.getElementById('carousel-spinner');
- const cards = document.querySelectorAll('.carousel-card');
- const totalCards = cards.length;
- const angle = 360 / totalCards;
- const translateZ = window.innerWidth < 768 ? 200 : 350; // Responsive Z distance
- 
- cards.forEach((card, index) => {
- const currentAngle = angle * index;
- card.style.transform = `rotateY(${currentAngle}deg) translateZ(${translateZ}px)`;
- });
- 
- let currentRotation = 0;
- function autoRotateCarousel() {
- currentRotation -= 0.2; // Speed of auto-rotation
- spinner.style.transform = `rotateY(${currentRotation}deg)`;
- requestAnimationFrame(autoRotateCarousel);
+   // --- HERO FADER SETUP ---
+ const heroFaders = document.querySelectorAll('.hero-fader');
+ if(heroFaders.length > 0) {
+     let currentFader = 0;
+     setInterval(() => {
+         heroFaders[currentFader].style.opacity = '0';
+         currentFader = (currentFader + 1) % heroFaders.length;
+         heroFaders[currentFader].style.opacity = '1';
+     }, 3500);
  }
- autoRotateCarousel();
 
- // Sync Lenis Smooth Scroll
- const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
- function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
- requestAnimationFrame(raf);
-
- // GSAP ScrollTrigger
+  // GSAP ScrollTrigger
  gsap.registerPlugin(ScrollTrigger);
+
+  // Sync Lenis Smooth Scroll
+ const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+ 
+ if (typeof ScrollTrigger !== 'undefined') {
+     lenis.on('scroll', ScrollTrigger.update);
+ }
+ 
+ function raf(time) {
+     lenis.raf(time);
+     requestAnimationFrame(raf);
+ }
+ requestAnimationFrame(raf);
 
  // Marquee
  gsap.to("#reviews-track", { xPercent: -50, ease: "none", duration: 30, repeat: -1 });
@@ -540,13 +544,19 @@
  }
  });
 
-         // Custom Cursor Logic
- const cursorDot = document.querySelector('.cursor-dot');
- const cursorOutline = document.querySelector('.cursor-outline');
- window.addEventListener('mousemove', (e) => {
- cursorDot.style.left = e.clientX + 'px'; cursorDot.style.top = e.clientY + 'px';
- cursorOutline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 150, fill: "forwards" });
- });
+                 // Custom Cursor Logic Optimized
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        if (cursorDot && cursorOutline && typeof gsap !== 'undefined') {
+            const xTo = gsap.quickTo(cursorOutline, "left", {duration: 0.15, ease: "power3"});
+            const yTo = gsap.quickTo(cursorOutline, "top", {duration: 0.15, ease: "power3"});
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px'; 
+                cursorDot.style.top = e.clientY + 'px';
+                xTo(e.clientX); 
+                                yTo(e.clientY);
+            });
+        }
 
  // --- TIMELINE SCROLL ANIMATION ---
  const timelineSection = document.getElementById('bilona-timeline');
@@ -584,6 +594,17 @@
  </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
