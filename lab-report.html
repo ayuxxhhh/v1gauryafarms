@@ -21,16 +21,27 @@
         }
     </script>
     
-    <style>
-        body { background-color: #1A1A1A; color: #FAF9F6; cursor: auto; overflow-x: hidden; }
+        <style>
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #f0ebe1;
+            --bg-tertiary: #ffffff;
+            --bg-subtle: #ffffff;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4a4a4a;
+            --border-color: rgba(0,0,0,0.05);
+        }
+        body { background-color: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; }
         ::selection { background-color: #C5A059; color: white; }
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
-        .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
-        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
+        .text-themed { color: var(--text-primary); }
+        .text-themed-muted { color: var(--text-secondary); }
+        
+        /* Lenis CSS */
         html.lenis, html.lenis body { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
-        .reveal-up { opacity: 0; transform: translateY(30px); }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
     </style>
 </head>
 <body class="font-sans antialiased text-[#111]">
@@ -39,7 +50,7 @@
     <div class="cursor-outline" id="cursor-outline"></div>
 
     <!-- Header Navigation -->
-    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
+    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-black/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/Gaurya Farms Logo (New).svg" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
             <div class="hidden md:flex space-x-8 items-center">
@@ -64,24 +75,24 @@
         </div>
 
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 reveal-up">
-            <div class="border border-white/10 bg-[var(--bg-subtle)] p-10 hover:border-gold transition-colors duration-500">
+            <div class="border border-black/10 bg-[var(--bg-subtle)] p-10 hover:border-gold transition-colors duration-500">
                 <h3 class="font-serif text-2xl mb-6 text-gold">Nutritional Profile</h3>
                 <ul class="space-y-4 text-muted font-light">
-                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Energy Value</span> <span class="text-[#111]">897 kcal/100g</span></li>
-                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Milk Fat</span> <span class="text-[#111]">99.7%</span></li>
-                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Moisture</span> <span class="text-[#111]">0.2%</span></li>
-                    <li class="flex justify-between border-b border-white/5 pb-2"><span>A2 Beta-Casein</span> <span class="text-[#111]">Present (High)</span></li>
+                    <li class="flex justify-between border-b border-black/5 pb-2"><span>Energy Value</span> <span class="text-[#111]">897 kcal/100g</span></li>
+                    <li class="flex justify-between border-b border-black/5 pb-2"><span>Milk Fat</span> <span class="text-[#111]">99.7%</span></li>
+                    <li class="flex justify-between border-b border-black/5 pb-2"><span>Moisture</span> <span class="text-[#111]">0.2%</span></li>
+                    <li class="flex justify-between border-b border-black/5 pb-2"><span>A2 Beta-Casein</span> <span class="text-[#111]">Present (High)</span></li>
                     <li class="flex justify-between pt-2"><span>Carbohydrates & Sugars</span> <span class="text-[#111]">0g</span></li>
                 </ul>
             </div>
             
-            <div class="border border-white/10 bg-[var(--bg-subtle)] p-10 hover:border-gold transition-colors duration-500">
+            <div class="border border-black/10 bg-[var(--bg-subtle)] p-10 hover:border-gold transition-colors duration-500">
                 <h3 class="font-serif text-2xl mb-6 text-gold">Adulteration Tests</h3>
                 <ul class="space-y-4 text-muted font-light">
-                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Vegetable Oils / Dalda</span> <span class="text-[#111]">Negative</span></li>
-                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Starch</span> <span class="text-[#111]">Negative</span></li>
-                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Added Colors</span> <span class="text-[#111]">Negative</span></li>
-                    <li class="flex justify-between border-b border-white/5 pb-2"><span>Heavy Metals (Lead, Arsenic)</span> <span class="text-[#111]">Below Detectable Limits</span></li>
+                    <li class="flex justify-between border-b border-black/5 pb-2"><span>Vegetable Oils / Dalda</span> <span class="text-[#111]">Negative</span></li>
+                    <li class="flex justify-between border-b border-black/5 pb-2"><span>Starch</span> <span class="text-[#111]">Negative</span></li>
+                    <li class="flex justify-between border-b border-black/5 pb-2"><span>Added Colors</span> <span class="text-[#111]">Negative</span></li>
+                    <li class="flex justify-between border-b border-black/5 pb-2"><span>Heavy Metals (Lead, Arsenic)</span> <span class="text-[#111]">Below Detectable Limits</span></li>
                     <li class="flex justify-between pt-2"><span>Preservatives</span> <span class="text-[#111]">Negative</span></li>
                 </ul>
             </div>
@@ -109,21 +120,46 @@
         </div>
     </footer>
 
-    <script>
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorOutline = document.getElementById('cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
-            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
-        });
-        const lenis = new Lenis({ duration: 1.2, smooth: true });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        <script>
+        // Custom Cursor Logic Optimized
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        if (cursorDot && cursorOutline && typeof gsap !== 'undefined') {
+            const xTo = gsap.quickTo(cursorOutline, "left", {duration: 0.15, ease: "power3"});
+            const yTo = gsap.quickTo(cursorOutline, "top", {duration: 0.15, ease: "power3"});
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px'; 
+                cursorDot.style.top = e.clientY + 'px';
+                xTo(e.clientX); 
+                yTo(e.clientY);
+            });
+        }
+
+        // Sync Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        
+        if (typeof ScrollTrigger !== 'undefined') {
+            lenis.on('scroll', ScrollTrigger.update);
+        }
+        
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
         
-        gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.2 });
+        if (typeof gsap !== 'undefined') {
+            gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.5 });
+        }
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
