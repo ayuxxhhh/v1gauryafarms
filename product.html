@@ -41,7 +41,13 @@
         .text-themed { color: var(--text-primary); }
         .text-themed-muted { color: var(--text-muted); }
         .text-themed-faint { color: var(--text-faint); }
-        </style>
+                /* Lenis CSS */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+    </style>
 </head>
 <body class="font-sans antialiased text-themed">
 
@@ -72,12 +78,12 @@
                 <div class="sticky top-32 w-full flex flex-col gap-4 reveal-up">
                     <!-- Main Image -->
                     <div class="w-full h-[60vh] bg-[var(--bg-subtle)] overflow-hidden rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[var(--border-color)] relative group cursor-crosshair">
-                        <img id="main-product-image" src="assets/images/Artboard 8.png" class="w-full h-full object-cover transition-opacity duration-300">
+                        <img id="main-product-image" src="assets/images/Artboard 4.png" class="w-full h-full object-cover transition-opacity duration-300">
                     </div>
                     <!-- Thumbnails -->
                     <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x pt-2">
                         <button onclick="document.getElementById('main-product-image').src='assets/images/Artboard 1.jpg'" class="shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold transition-colors focus:outline-none focus:border-gold snap-start">
-                            <img src="assets/images/Artboard 8.png" class="w-full h-full object-cover">
+                            <img src="assets/images/Artboard 4.png" class="w-full h-full object-cover">
                         </button>
                         <button onclick="document.getElementById('main-product-image').src='assets/images/Artboard 2.png'" class="shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold transition-colors focus:outline-none focus:border-gold snap-start">
                             <img src="assets/images/Artboard 2.png" class="w-full h-full object-cover">
@@ -97,8 +103,8 @@
                         <button onclick="document.getElementById('main-product-image').src='assets/images/Artboard 7.png'" class="shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold transition-colors focus:outline-none focus:border-gold snap-start">
                             <img src="assets/images/Artboard 7.png" class="w-full h-full object-cover">
                         </button>
-                        <button onclick="document.getElementById('main-product-image').src='assets/images/Artboard 8.png'" class="shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold transition-colors focus:outline-none focus:border-gold snap-start">
-                            <img src="assets/images/Artboard 8.png" class="w-full h-full object-cover">
+                        <button onclick="document.getElementById('main-product-image').src='assets/images/Artboard 4.png'" class="shrink-0 w-24 h-24 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold transition-colors focus:outline-none focus:border-gold snap-start">
+                            <img src="assets/images/Artboard 4.png" class="w-full h-full object-cover">
                         </button>
                     </div>
                 </div>
@@ -392,7 +398,13 @@
         .text-themed { color: var(--text-primary); }
         .text-themed-muted { color: var(--text-muted); }
         .text-themed-faint { color: var(--text-faint); }
-        </style>
+                /* Lenis CSS */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+    </style>
 
     <script>
         const cursorDot = document.getElementById('cursor-dot');
@@ -401,8 +413,22 @@
             cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
             cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
         });
-        const lenis = new Lenis({ duration: 1.2, smooth: true });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+                 // Sync Lenis Smooth Scroll
+ const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+ 
+ if (typeof ScrollTrigger !== 'undefined') {
+     lenis.on('scroll', ScrollTrigger.update);
+ }
+ 
+ function raf(time) {
+     lenis.raf(time);
+     requestAnimationFrame(raf);
+ }
+ requestAnimationFrame(raf);
+        } else {
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+            requestAnimationFrame(raf);
+        } }
         requestAnimationFrame(raf);
         
         gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
@@ -469,6 +495,12 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 
