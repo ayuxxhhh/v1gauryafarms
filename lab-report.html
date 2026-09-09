@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -36,15 +36,39 @@
         .text-themed { color: var(--text-primary); }
         .text-themed-muted { color: var(--text-secondary); }
         
-        /* Lenis CSS */
+                /* Lenis CSS */
         html.lenis, html.lenis body { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
         .lenis.lenis-scrolling iframe { pointer-events: none; }
+        
+        /* Mobile Optimizations */
+        @media (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none !important; }
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-[#111]">
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="fixed bottom-0 left-0 w-full bg-[var(--bg-card)] border-t border-[var(--border-color)] z-50 md:hidden flex justify-around items-center py-3 text-[9px] font-bold uppercase tracking-widest text-themed-muted shadow-[0_-10px_20px_rgba(0,0,0,0.05)]" style="padding-bottom: env(safe-area-inset-bottom, 1rem);">
+        <a href="index.html" class="flex flex-col items-center hover:text-gold transition-colors">
+            <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            <span>Home</span>
+        </a>
+        <a href="product.html" class="flex flex-col items-center hover:text-gold transition-colors">
+            <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <span>Shop</span>
+        </a>
+        <a href="about-us.html" class="flex flex-col items-center hover:text-gold transition-colors">
+            <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <span>Story</span>
+        </a>
+        <a href="product.html" class="flex flex-col items-center hover:text-gold transition-colors">
+            <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span>Cart</span>
+        </a>
+    </nav>
 
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
@@ -59,7 +83,7 @@
                 <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Our Story</a>
                 <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Lab Report</a>
                 <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Contact</a>
-                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
+                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors border border-black/20 px-4 py-2 hover:border-gold">Cart (0)</a>
             </div>
         </div>
     </header>
@@ -154,6 +178,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
