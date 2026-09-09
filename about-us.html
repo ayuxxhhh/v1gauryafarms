@@ -22,19 +22,27 @@
         }
     </script>
     
-    <style>
-        body { background-color: #1A1A1A; color: #FAF9F6; cursor: auto; overflow-x: hidden; }
+        <style>
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #f0ebe1;
+            --bg-tertiary: #ffffff;
+            --bg-subtle: #ffffff;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4a4a4a;
+            --border-color: rgba(0,0,0,0.05);
+        }
+        body { background-color: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; }
         ::selection { background-color: #C5A059; color: white; }
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
-        .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
-        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
+        .text-themed { color: var(--text-primary); }
+        .text-themed-muted { color: var(--text-secondary); }
+        
+        /* Lenis CSS */
         html.lenis, html.lenis body { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .reveal-up { opacity: 0; transform: translateY(30px); }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
     </style>
 </head>
 <body class="font-sans antialiased text-[#111]">
@@ -44,7 +52,7 @@
     <div class="cursor-outline" id="cursor-outline"></div>
 
     <!-- Header Navigation -->
-    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
+    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-black/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/Gaurya Farms Logo (New).svg" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
             <div class="hidden md:flex space-x-8 items-center">
@@ -78,9 +86,9 @@
 
         <!-- Section 2: The Philosophy Grid -->
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 mb-32 items-center reveal-up">
-            <div class="bg-[var(--bg-subtle)] p-12 border border-white/5 h-full flex flex-col justify-center">
+            <div class="bg-[var(--bg-subtle)] p-12 border border-black/5 h-full flex flex-col justify-center">
                 <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold mb-4">The Philosophy</p>
-                <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6 text-[#111]">More than a business,<br><span class="italic text-white/50">it's a devotion.</span></h2>
+                <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6 text-[#111]">More than a business,<br><span class="italic text-black/50">it's a devotion.</span></h2>
                 <div class="space-y-4 text-muted font-light">
                     <p>In an era of mass production and hyper-efficiency, we chose the path of resistance. True A2 Bilona Ghee cannot be rushed in a factory. It requires the gentle rhythm of hand-churning before dawn, the exact temperature of a slow-burning wood fire, and the silent, intuitive knowledge passed down through our ancestors.</p>
                     <p>We restrict our batches deliberately. By focusing exclusively on this single craft, we ensure that every jar that leaves our farm carries the energetic signature of pure, unadulterated devotion.</p>
@@ -110,7 +118,7 @@
         </div>
         
                 <!-- Section 4: The Founder's Vision -->
-        <div class="max-w-7xl mx-auto border-t border-white/5 pt-20 mt-12 mb-16 reveal-up">
+        <div class="max-w-7xl mx-auto border-t border-black/5 pt-20 mt-12 mb-16 reveal-up">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
                 
                 <!-- Image Column -->
@@ -124,10 +132,10 @@
                     
                     <div class="space-y-8 text-2xl md:text-3xl font-serif leading-snug text-[#111]">
                         <p class="italic">"When did we all agree that 'faster' was better when it comes to the food we feed our families?"</p>
-                        <p class="text-white/80 text-xl md:text-2xl italic leading-relaxed">
+                        <p class="text-black/80 text-xl md:text-2xl italic leading-relaxed">
                             "Somewhere along the line, India was convinced that a factory-processed tub from a supermarket shelf was the same as what our Dadis and Nanis made with their hands. But deep down, every time you smell real, golden, slow-churned ghee, you know the difference."
                         </p>
-                        <p class="text-white/80 text-xl md:text-2xl italic leading-relaxed">
+                        <p class="text-black/80 text-xl md:text-2xl italic leading-relaxed">
                             "We didn't start Gaurya Farms to give you a sustainability lecture or a wellness sermon. We started it as friends who went back to the village, unlearned the shortcuts, understood the science, and brought the original stuff back."
                         </p>
                         <p class="text-xl md:text-2xl italic text-gold">
@@ -161,21 +169,47 @@
         </div>
     </footer>
 
-    <script>
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorOutline = document.getElementById('cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
-            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
-        });
-        const lenis = new Lenis({ duration: 1.2, smooth: true });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        <script>
+        // Custom Cursor Logic Optimized
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        if (cursorDot && cursorOutline && typeof gsap !== 'undefined') {
+            const xTo = gsap.quickTo(cursorOutline, "left", {duration: 0.15, ease: "power3"});
+            const yTo = gsap.quickTo(cursorOutline, "top", {duration: 0.15, ease: "power3"});
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px'; 
+                cursorDot.style.top = e.clientY + 'px';
+                xTo(e.clientX); 
+                yTo(e.clientY);
+            });
+        }
+
+        // Sync Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        
+        if (typeof ScrollTrigger !== 'undefined') {
+            lenis.on('scroll', ScrollTrigger.update);
+        }
+        
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
         
-        gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.5 });
+        if (typeof gsap !== 'undefined') {
+            gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.5 });
+        }
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
